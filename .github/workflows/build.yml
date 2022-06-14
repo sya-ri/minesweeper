@@ -10,11 +10,17 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16
-      - name: Build
+      - name: Install dependencies
         run: |
           yarn
+      - name: Check lint
+        run: |
           yarn lint
+      - name: Test
+        run: |
           yarn test
+      - name: Build
+        run: |
           yarn build
       - name: Upload artifact
         uses: actions/upload-artifact@v3
