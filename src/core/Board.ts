@@ -57,12 +57,15 @@ export default class Board {
   /**
    * Open the tile of (x, y).
    */
-  public openTile(x: number, y: number) {
+  public openTile(x: number, y: number): boolean {
     const tile = this.getTile(x, y)
     if (tile.isOpen) {
       return false
     }
     tile.open()
+    if (!tile.isBomb && this.countAroundBomb(x, y) === 0) {
+      this.getAround(x, y).forEach(({ x: tx, y: ty }) => this.openTile(tx, ty))
+    }
     return true
   }
 }

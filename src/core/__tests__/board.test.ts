@@ -57,3 +57,15 @@ it('should open the tile', () => {
   expect(board.openTile(0, 0)).toEqual(true)
   expect(board.openTile(0, 0)).toEqual(false)
 })
+
+it('should open surrounding tiles if there are no bombs around', () => {
+  const tiles = [
+    [tile(0), tile(1), tile(2)],
+    [tile(3), tile(4), bomb(5)],
+    [tile(6), bomb(7), tile(8)]
+  ]
+  expect(new Board(tiles).openTile(0, 0)).toEqual(true)
+  expect(tiles.flatMap((tt) => tt.filter((t) => t.isOpen)).map((t) => t.id)).toEqual(
+    expect.arrayContaining([0, 1, 3, 4])
+  )
+})
