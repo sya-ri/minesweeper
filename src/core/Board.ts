@@ -1,5 +1,6 @@
 import Tile from './tile/Tile'
 import TilePosition from './tile/TilePosition'
+import OpenTileResult from './tile/OpenTileResult'
 
 export default class Board {
   private readonly tiles: Tile[][] = []
@@ -57,15 +58,12 @@ export default class Board {
   /**
    * Open the tile of (x, y).
    */
-  public openTile(x: number, y: number): boolean {
+  public openTile(x: number, y: number): OpenTileResult {
     const tile = this.getTile(x, y)
-    if (tile.isOpen) {
-      return false
-    }
-    tile.open()
-    if (!tile.isBomb && this.countAroundBomb(x, y) === 0) {
+    const result = tile.open()
+    if (result === OpenTileResult.Success && this.countAroundBomb(x, y) === 0) {
       this.getAround(x, y).forEach(({ x: tx, y: ty }) => this.openTile(tx, ty))
     }
-    return true
+    return result
   }
 }

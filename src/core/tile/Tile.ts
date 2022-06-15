@@ -1,3 +1,5 @@
+import OpenTileResult from './OpenTileResult'
+
 export default class Tile {
   public readonly id: number
 
@@ -19,13 +21,12 @@ export default class Tile {
 
   /**
    * Open the tile.
-   *
-   * @throws The tile is already open.
    */
-  public open() {
+  public open(): OpenTileResult {
     if (this._isOpen) {
-      throw new Error('The tile is already open.')
+      return OpenTileResult.Failure
     }
     this._isOpen = true
+    return this.isBomb ? OpenTileResult.GameOver : OpenTileResult.Success
   }
 }

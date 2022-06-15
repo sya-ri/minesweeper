@@ -1,5 +1,6 @@
 import Board from '../Board'
 import Tile from '../tile/Tile'
+import OpenTileResult from '../tile/OpenTileResult'
 
 const tile = (id: number) => new Tile(id)
 const bomb = (id: number) => new Tile(id, true)
@@ -53,9 +54,10 @@ it('should count the bombs', () => {
 })
 
 it('should open the tile', () => {
-  const board = new Board([[tile(0)]])
-  expect(board.openTile(0, 0)).toEqual(true)
-  expect(board.openTile(0, 0)).toEqual(false)
+  const board = new Board([[tile(0), bomb(1)]])
+  expect(board.openTile(0, 0)).toEqual(OpenTileResult.Success)
+  expect(board.openTile(0, 0)).toEqual(OpenTileResult.Failure)
+  expect(board.openTile(1, 0)).toEqual(OpenTileResult.GameOver)
 })
 
 it('should open surrounding tiles if there are no bombs around', () => {
@@ -64,7 +66,7 @@ it('should open surrounding tiles if there are no bombs around', () => {
     [tile(3), tile(4), bomb(5)],
     [tile(6), bomb(7), tile(8)]
   ]
-  expect(new Board(tiles).openTile(0, 0)).toEqual(true)
+  expect(new Board(tiles).openTile(0, 0)).toEqual(OpenTileResult.Success)
   expect(tiles.flatMap((tt) => tt.filter((t) => t.isOpen)).map((t) => t.id)).toEqual(
     expect.arrayContaining([0, 1, 3, 4])
   )
