@@ -1,4 +1,5 @@
 import Tile from './tile/Tile'
+import TilePosition from './tile/TilePosition'
 
 export default class Board {
   private readonly tiles: Tile[][] = []
@@ -27,16 +28,23 @@ export default class Board {
   /**
    * Get the tiles around (x, y).
    */
-  public getAroundTiles(x: number, y: number): Tile[] {
-    const tiles = []
+  public getAround(x: number, y: number): TilePosition[] {
+    const positions: TilePosition[] = []
     for (let i = -1; i <= 1; i += 1) {
       for (let j = -1; j <= 1; j += 1) {
         if ((i !== 0 || j !== 0) && this.isInside(x + i, y + j)) {
-          tiles.push(this.getTile(x + i, y + j))
+          positions.push({ x: x + i, y: y + j })
         }
       }
     }
-    return tiles
+    return positions
+  }
+
+  /**
+   * Get the tiles around (x, y).
+   */
+  public getAroundTiles(x: number, y: number): Tile[] {
+    return this.getAround(x, y).map(({ x: tx, y: ty }) => this.getTile(tx, ty))
   }
 
   /**
