@@ -1,14 +1,16 @@
 import Board from '../Board'
 import Tile from '../tile/Tile'
 
+const tile = (id: number) => new Tile(id)
+
 it('should get the tile', () => {
-  expect(new Board([[new Tile(1), new Tile(2)]]).getTile(1, 0)).toEqual(new Tile(2))
+  expect(new Board([[tile(1), tile(2)]]).getTile(1, 0)).toEqual(tile(2))
 })
 
 it('should determine whether inside of the board', () => {
   const board2x2 = new Board([
-    [new Tile(0), new Tile(1)],
-    [new Tile(2), new Tile(3)]
+    [tile(0), tile(1)],
+    [tile(2), tile(3)]
   ])
   expect(new Board([]).isInside(0, 0)).toEqual(false)
   expect(board2x2.isInside(0, 0)).toEqual(true)
@@ -25,9 +27,9 @@ it('should determine whether inside of the board', () => {
 
 it('should get the around tiles', () => {
   const board3x3 = new Board([
-    [new Tile(0), new Tile(1), new Tile(2)],
-    [new Tile(3), new Tile(4), new Tile(5)],
-    [new Tile(6), new Tile(7), new Tile(8)]
+    [tile(0), tile(1), tile(2)],
+    [tile(3), tile(4), tile(5)],
+    [tile(6), tile(7), tile(8)]
   ])
   expect(board3x3.getAroundTiles(0, 0).map((t) => t.id)).toEqual(expect.arrayContaining([1, 3, 4]))
   expect(board3x3.getAroundTiles(0, 1).map((t) => t.id)).toEqual(expect.arrayContaining([0, 1, 4, 6, 7]))
@@ -39,7 +41,7 @@ it('should get empty around, for the blank tiles', () => {
 })
 
 it('should open the tile', () => {
-  const board = new Board([[new Tile(0)]])
+  const board = new Board([[tile(0)]])
   expect(board.openTile(0, 0)).toEqual(true)
   expect(board.openTile(0, 0)).toEqual(false)
 })
