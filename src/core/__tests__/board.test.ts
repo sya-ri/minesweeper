@@ -37,3 +37,9 @@ it('should get the around tiles', () => {
 it('should get empty around, for the blank tiles', () => {
   expect(new Board([]).getAroundTiles(0, 0)).toEqual([])
 })
+
+it('should open the tile', () => {
+  const board = new Board([[new Tile(0)]])
+  expect(board.openTile(0, 0)).toEqual(true)
+  expect(board.openTile(0, 0)).toEqual(false)
+})

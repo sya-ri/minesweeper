@@ -15,7 +15,7 @@ export default class Board {
   }
 
   /**
-   * Get tile at (x, y).
+   * Get the tile of (x, y).
    * if (x, y) is outside the board, throw an exception or return undefined.
    *
    * @see isInside
@@ -37,5 +37,17 @@ export default class Board {
       }
     }
     return tiles
+  }
+
+  /**
+   * Open the tile of (x, y).
+   */
+  public openTile(x: number, y: number) {
+    const tile = this.getTile(x, y)
+    if (tile.isOpen) {
+      return false
+    }
+    tile.open()
+    return true
   }
 }

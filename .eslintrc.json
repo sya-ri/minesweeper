@@ -30,9 +30,15 @@
         "arrow-body-style": "off",
         "prefer-arrow-callback": "off",
         "react/function-component-definition": [
-            2,
+            "error",
             {
                 "namedComponents": "arrow-function"
+            }
+        ],
+        "no-underscore-dangle": [
+            "error",
+            {
+                "allowAfterThis": true
             }
         ]
     }
