@@ -1,10 +1,13 @@
 export default class Tile {
   public readonly id: number
 
+  public readonly isBomb: boolean
+
   private _isOpen = false
 
-  constructor(id: number) {
+  constructor(id: number, isBomb: boolean = false) {
     this.id = id
+    this.isBomb = isBomb
   }
 
   /**

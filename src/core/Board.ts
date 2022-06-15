@@ -48,6 +48,13 @@ export default class Board {
   }
 
   /**
+   * Get the number of bombs around the tile.
+   */
+  public countAroundBomb(x: number, y: number): number {
+    return this.getAroundTiles(x, y).filter((tile) => tile.isBomb).length
+  }
+
+  /**
    * Open the tile of (x, y).
    */
   public openTile(x: number, y: number) {

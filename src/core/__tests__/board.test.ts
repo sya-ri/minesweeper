@@ -2,6 +2,7 @@ import Board from '../Board'
 import Tile from '../tile/Tile'
 
 const tile = (id: number) => new Tile(id)
+const bomb = (id: number) => new Tile(id, true)
 
 it('should get the tile', () => {
   expect(new Board([[tile(1), tile(2)]]).getTile(1, 0)).toEqual(tile(2))
@@ -38,6 +39,17 @@ it('should get the around tiles', () => {
 
 it('should get empty around, for the blank tiles', () => {
   expect(new Board([]).getAroundTiles(0, 0)).toEqual([])
+})
+
+it('should count the bombs', () => {
+  const board3x3 = new Board([
+    [tile(0), bomb(1), bomb(2)],
+    [bomb(3), tile(4), tile(5)],
+    [bomb(6), tile(7), tile(8)]
+  ])
+  expect(board3x3.countAroundBomb(0, 0)).toEqual(2)
+  expect(board3x3.countAroundBomb(1, 1)).toEqual(4)
+  expect(board3x3.countAroundBomb(2, 2)).toEqual(0)
 })
 
 it('should open the tile', () => {
