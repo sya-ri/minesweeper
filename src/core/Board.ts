@@ -45,14 +45,14 @@ export default class Board {
    * Get the tiles around (x, y).
    */
   public getAroundTiles(x: number, y: number): Tile[] {
-    return this.getAround(x, y).map(({ x: tx, y: ty }) => this.getTile(tx, ty))
+    return this.getAround(x, y).map((t) => this.getTile(t.x, t.y))
   }
 
   /**
    * Get the number of bombs around the tile.
    */
   public countAroundBomb(x: number, y: number): number {
-    return this.getAroundTiles(x, y).filter((tile) => tile.isBomb).length
+    return this.getAroundTiles(x, y).filter((t) => t.isBomb).length
   }
 
   /**
@@ -62,7 +62,7 @@ export default class Board {
     const tile = this.getTile(x, y)
     const result = tile.open()
     if (result === OpenTileResult.Success && this.countAroundBomb(x, y) === 0) {
-      this.getAround(x, y).forEach(({ x: tx, y: ty }) => this.openTile(tx, ty))
+      this.getAround(x, y).forEach((t) => this.openTile(t.x, t.y))
     }
     return result
   }
