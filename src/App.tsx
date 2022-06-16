@@ -34,8 +34,8 @@ const App: FC = () => {
       {board.tiles.map((tt) => (
         <div className="flex">
           {tt.map((t) => {
-            let text
-            let color
+            let text: string
+            let color: string = 'text-black'
             if (t.isOpen) {
               const bomb = board.countAroundBomb(t.x, t.y)
               text = bomb.toString()
