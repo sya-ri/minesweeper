@@ -10,4 +10,6 @@ export default interface ReadOnlyTile {
   readonly isBomb: boolean
 
   readonly isOpen: boolean
+
+  readonly hasFlag: boolean
 }

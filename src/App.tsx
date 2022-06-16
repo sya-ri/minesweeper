@@ -40,6 +40,8 @@ const App: FC = () => {
               const bomb = board.countAroundBomb(t.x, t.y)
               text = bomb.toString()
               color = getColor(bomb)
+            } else if (t.hasFlag) {
+              text = 'X'
             } else {
               text = '-'
             }
@@ -47,12 +49,21 @@ const App: FC = () => {
               <button
                 type="button"
                 className={`w-8 h-8 border ${color}`}
-                onClick={() => {
-                  const result = board.openTile(t.x, t.y)
-                  if (result === OpenTileResult.GameOver) {
-                    alert('Game Over') // eslint-disable-line no-alert
-                    window.location.reload()
+                onClick={(event) => {
+                  if (event.shiftKey) {
+                    board.toggleFlag(t.x, t.y)
+                  } else {
+                    const result = board.openTile(t.x, t.y)
+                    if (result === OpenTileResult.GameOver) {
+                      alert('Game Over') // eslint-disable-line no-alert
+                      window.location.reload()
+                    }
                   }
+                  setBoard(board.clone())
+                }}
+                onContextMenu={(event) => {
+                  event.preventDefault()
+                  board.toggleFlag(t.x, t.y)
                   setBoard(board.clone())
                 }}
               >

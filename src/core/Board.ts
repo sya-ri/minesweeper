@@ -2,6 +2,7 @@ import Tile from './tile/Tile'
 import TilePosition from './tile/TilePosition'
 import OpenTileResult from './tile/OpenTileResult'
 import ReadOnlyTile from './tile/ReadOnlyTile'
+import ToggleFlagResult from './tile/ToggleFlagResult'
 
 export default class Board {
   private readonly _tiles: Tile[][] = []
@@ -74,5 +75,10 @@ export default class Board {
       this.getAround(x, y).forEach((t) => this.openTile(t.x, t.y))
     }
     return result
+  }
+
+  public toggleFlag(x: number, y: number): ToggleFlagResult {
+    const tile = this.getTile(x, y)
+    return tile.toggleFlag()
   }
 }
