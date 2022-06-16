@@ -1,7 +1,8 @@
 import OpenTileResult from './OpenTileResult'
 import TilePosition from './TilePosition'
+import ReadOnlyTile from './ReadOnlyTile'
 
-export default class Tile {
+export default class Tile implements ReadOnlyTile {
   public readonly x: number
 
   public readonly y: number

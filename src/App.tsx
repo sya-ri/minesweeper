@@ -30,7 +30,7 @@ const App: FC = () => {
                   alert('Game Over') // eslint-disable-line no-alert
                   window.location.reload()
                 }
-                setBoard(new Board(board.tiles))
+                setBoard(board.clone())
               }}
             >
               {t.isOpen ? board.countAroundBomb(t.x, t.y) : '-'}

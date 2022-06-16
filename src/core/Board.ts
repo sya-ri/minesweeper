@@ -1,19 +1,28 @@
 import Tile from './tile/Tile'
 import TilePosition from './tile/TilePosition'
 import OpenTileResult from './tile/OpenTileResult'
+import ReadOnlyTile from './tile/ReadOnlyTile'
 
 export default class Board {
-  readonly tiles: Tile[][] = []
+  private readonly _tiles: Tile[][] = []
 
   constructor(tiles: Tile[][]) {
-    this.tiles = tiles
+    this._tiles = tiles
+  }
+
+  public get tiles(): ReadOnlyTile[][] {
+    return this._tiles
+  }
+
+  public clone(): Board {
+    return new Board(this._tiles)
   }
 
   /**
    * Get if (x, y) is in the board.
    */
   public isInside(x: number, y: number): boolean {
-    return x >= 0 && y >= 0 && y < this.tiles.length && x < this.tiles[y].length
+    return x >= 0 && y >= 0 && y < this._tiles.length && x < this._tiles[y].length
   }
 
   /**
@@ -23,7 +32,7 @@ export default class Board {
    * @see isInside
    */
   public getTile(x: number, y: number): Tile {
-    return this.tiles[y][x]
+    return this._tiles[y][x]
   }
 
   /**
