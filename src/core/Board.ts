@@ -3,7 +3,7 @@ import TilePosition from './tile/TilePosition'
 import OpenTileResult from './tile/OpenTileResult'
 
 export default class Board {
-  private readonly tiles: Tile[][] = []
+  readonly tiles: Tile[][] = []
 
   constructor(tiles: Tile[][]) {
     this.tiles = tiles
