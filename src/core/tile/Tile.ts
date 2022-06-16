@@ -1,15 +1,26 @@
 import OpenTileResult from './OpenTileResult'
+import TilePosition from './TilePosition'
 
 export default class Tile {
-  public readonly id: number
+  public readonly x: number
+
+  public readonly y: number
 
   public readonly isBomb: boolean
 
   private _isOpen = false
 
-  constructor(id: number, isBomb: boolean = false) {
-    this.id = id
+  constructor(x: number, y: number, isBomb: boolean = false) {
+    this.x = x
+    this.y = y
     this.isBomb = isBomb
+  }
+
+  /**
+   * Get (x, y).
+   */
+  public get position(): TilePosition {
+    return { x: this.x, y: this.y }
   }
 
   /**
