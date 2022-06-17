@@ -77,6 +77,9 @@ export default class Board {
     return result
   }
 
+  /**
+   * Place or take the flag of (x, y).
+   */
   public toggleFlag(x: number, y: number): ToggleFlagResult {
     const tile = this.getTile(x, y)
     return tile.toggleFlag()
