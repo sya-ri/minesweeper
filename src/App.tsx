@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react'
 import OpenTileResult from './core/tile/OpenTileResult'
-import generateBoard from './core/generateBoard'
+import RandomBoardGenerator from './core/generator/RandomBoardGenerator'
 
 const getColor = (bomb: number): string => {
   switch (bomb) {
@@ -28,7 +28,7 @@ const getColor = (bomb: number): string => {
 }
 
 const App: FC = () => {
-  const [board, setBoard] = useState(() => generateBoard(30, 16, 99))
+  const [board, setBoard] = useState(() => RandomBoardGenerator(30, 16, 99))
   return (
     <div>
       {board.tiles.map((tt) => (

@@ -1,7 +1,7 @@
-import Board from './Board'
-import Tile from './tile/Tile'
+import Board from '../Board'
+import Tile from '../tile/Tile'
 
-const generateBoard = (width: number, height: number, numberOfBomb: number): Board => {
+const RandomBoardGenerator = (width: number, height: number, numberOfBomb: number): Board => {
   const bombs = new Set<number>()
   while (bombs.size < numberOfBomb) {
     const x = Math.floor(Math.random() * width)
@@ -19,4 +19,4 @@ const generateBoard = (width: number, height: number, numberOfBomb: number): Boa
   return new Board(tiles)
 }
 
-export default generateBoard
+export default RandomBoardGenerator
