@@ -3,8 +3,9 @@ import TilePosition from '../tile/TilePosition'
 import OpenTileResult from '../tile/OpenTileResult'
 import ReadOnlyTile from '../tile/ReadOnlyTile'
 import ToggleFlagResult from '../tile/ToggleFlagResult'
+import IBoard from './IBoard'
 
-export default class Board {
+export default class Board implements IBoard {
   private readonly _tiles: Tile[][] = []
 
   constructor(tiles: Tile[][]) {
@@ -26,12 +27,6 @@ export default class Board {
     return x >= 0 && y >= 0 && y < this._tiles.length && x < this._tiles[y].length
   }
 
-  /**
-   * Get the tile of (x, y).
-   * if (x, y) is outside the board, throw an exception or return undefined.
-   *
-   * @see isInside
-   */
   public getTile(x: number, y: number): Tile {
     return this._tiles[y][x]
   }
@@ -58,16 +53,10 @@ export default class Board {
     return this.getAround(x, y).map((t) => this.getTile(t.x, t.y))
   }
 
-  /**
-   * Get the number of bombs around the tile.
-   */
   public countAroundBomb(x: number, y: number): number {
     return this.getAroundTiles(x, y).filter((t) => t.isBomb).length
   }
 
-  /**
-   * Open the tile of (x, y).
-   */
   public openTile(x: number, y: number): OpenTileResult {
     const tile = this.getTile(x, y)
     const result = tile.open()
@@ -77,9 +66,6 @@ export default class Board {
     return result
   }
 
-  /**
-   * Place or take the flag of (x, y).
-   */
   public toggleFlag(x: number, y: number): ToggleFlagResult {
     const tile = this.getTile(x, y)
     return tile.toggleFlag()

@@ -1,6 +1,8 @@
 import React, { FC, useState } from 'react'
 import OpenTileResult from './core/tile/OpenTileResult'
 import RandomBoardGenerator from './core/generator/RandomBoardGenerator'
+import LazyBoard from './core/board/LazyBoard'
+import IBoard from './core/board/IBoard'
 
 const getColor = (bomb: number): string => {
   switch (bomb) {
@@ -28,7 +30,7 @@ const getColor = (bomb: number): string => {
 }
 
 const App: FC = () => {
-  const [board, setBoard] = useState(() => RandomBoardGenerator(30, 16, 99))
+  const [board, setBoard] = useState<IBoard>(() => new LazyBoard(30, 16, RandomBoardGenerator(99)))
   return (
     <div>
       {board.tiles.map((tt) => (
