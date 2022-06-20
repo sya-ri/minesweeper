@@ -1,4 +1,4 @@
-import Board from '../Board'
+import Board from '../board/Board'
 import Tile from '../tile/Tile'
 import OpenTileResult from '../tile/OpenTileResult'
 

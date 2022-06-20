@@ -1,8 +1,8 @@
-import Tile from './tile/Tile'
-import TilePosition from './tile/TilePosition'
-import OpenTileResult from './tile/OpenTileResult'
-import ReadOnlyTile from './tile/ReadOnlyTile'
-import ToggleFlagResult from './tile/ToggleFlagResult'
+import Tile from '../tile/Tile'
+import TilePosition from '../tile/TilePosition'
+import OpenTileResult from '../tile/OpenTileResult'
+import ReadOnlyTile from '../tile/ReadOnlyTile'
+import ToggleFlagResult from '../tile/ToggleFlagResult'
 
 export default class Board {
   private readonly _tiles: Tile[][] = []
