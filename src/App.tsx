@@ -50,7 +50,7 @@ const App: FC = () => {
             return (
               <button
                 type="button"
-                className={`w-8 h-8 border ${color}`}
+                className={`w-8 h-8 shrink-0 border ${color}`}
                 onClick={(event) => {
                   if (event.shiftKey) {
                     board.toggleFlag(t.x, t.y)
