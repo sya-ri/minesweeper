@@ -75,6 +75,28 @@ const App: FC = () => {
           })}
         </div>
       ))}
+      <div>
+        <button
+          type="button"
+          onClick={() => {
+            const height = board.tiles.length
+            const width = board.tiles[0].length
+            for (let y = 0; y < height; y += 1) {
+              for (let x = 0; x < width; x += 1) {
+                const tile = board.getTile(x, y)
+                if (tile.isBomb) {
+                  if (!tile.hasFlag) tile.toggleFlag()
+                } else {
+                  tile.open()
+                }
+              }
+            }
+            setBoard(board.clone())
+          }}
+        >
+          Show Board
+        </button>
+      </div>
     </div>
   )
 }
