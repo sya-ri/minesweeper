@@ -32,9 +32,9 @@ const getColor = (bomb: number): string => {
 const App: FC = () => {
   const [board, setBoard] = useState<IBoard>(() => new LazyBoard(30, 16, RandomBoardGenerator(99)))
   return (
-    <div>
+    <div className="mt-2">
       {board.tiles.map((tt) => (
-        <div className="flex">
+        <div className="flex justify-center">
           {tt.map((t) => {
             let text: string
             let color: string = 'text-black'
@@ -75,9 +75,10 @@ const App: FC = () => {
           })}
         </div>
       ))}
-      <div>
+      <div className="mt-2 flex justify-center">
         <button
           type="button"
+          className="p-1 border border-black hover:bg-gray-200"
           onClick={() => {
             const height = board.tiles.length
             const width = board.tiles[0].length
