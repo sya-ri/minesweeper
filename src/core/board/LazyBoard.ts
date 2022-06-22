@@ -21,17 +21,7 @@ export default class LazyBoard implements IBoard {
     height: number,
     generator: (width: number, height: number, opened: TilePosition[], flags: TilePosition[]) => IBoard
   ) {
-    this._tiles = (() => {
-      const tiles: Tile[][] = []
-      for (let y = 0; y < height; y += 1) {
-        const tt: Tile[] = []
-        for (let x = 0; x < width; x += 1) {
-          tt.push(new Tile(x, y))
-        }
-        tiles.push(tt)
-      }
-      return tiles
-    })()
+    this._tiles = Array.from({ length: height }, (_y, y) => Array.from({ length: width }, (_x, x) => new Tile(x, y)))
     this.width = width
     this.height = height
     this.generator = generator
