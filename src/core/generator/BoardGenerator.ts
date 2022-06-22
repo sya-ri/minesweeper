@@ -5,17 +5,15 @@ import IBoard from '../board/IBoard'
 
 const BoardGenerator = (hasBomb: (position: TilePosition) => boolean) => {
   return (width: number, height: number, opened: TilePosition[], flags: TilePosition[]): IBoard => {
-    const flagsId = flags.map(({ x, y }) => x * height + y)
     const tiles: Tile[][] = []
     for (let y = 0; y < height; y += 1) {
       const tt: Tile[] = []
       for (let x = 0; x < width; x += 1) {
-        const id = x * height + y
-        const t = new Tile(x, y, hasBomb({ x, y }))
-        if (flagsId.includes(id)) {
-          t.toggleFlag()
+        const tile = new Tile(x, y, hasBomb({ x, y }))
+        if (flags.some((t) => t.x === x && t.y === y)) {
+          tile.toggleFlag()
         }
-        tt.push(t)
+        tt.push(tile)
       }
       tiles.push(tt)
     }

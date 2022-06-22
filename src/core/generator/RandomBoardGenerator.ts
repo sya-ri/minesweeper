@@ -4,14 +4,12 @@ import IBoard from '../board/IBoard'
 
 const RandomBoardGenerator = (numberOfBomb: number) => {
   return (width: number, height: number, opened: TilePosition[], flags: TilePosition[]): IBoard => {
-    const openedId = opened.map(({ x, y }) => x * height + y)
     const bombs = new Set<number>()
     while (bombs.size < numberOfBomb) {
       const x = Math.floor(Math.random() * width)
       const y = Math.floor(Math.random() * height)
-      const id = x * height + y
-      if (!openedId.includes(id)) {
-        bombs.add(id)
+      if (!opened.some((t) => t.x === x && t.y === y)) {
+        bombs.add(x * height + y)
       }
     }
     const generator = BoardGenerator(({ x, y }) => bombs.has(x * height + y))
