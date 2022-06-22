@@ -75,7 +75,7 @@ const App: FC = () => {
           })}
         </div>
       ))}
-      <div className="mt-2 flex justify-center">
+      <div className="m-2 flex justify-center">
         <button
           type="button"
           className="p-1 border border-black hover:bg-gray-200"
