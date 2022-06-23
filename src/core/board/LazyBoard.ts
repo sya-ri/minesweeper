@@ -3,7 +3,6 @@ import OpenTileResult from '../tile/OpenTileResult'
 import TilePosition from '../tile/TilePosition'
 import ToggleFlagResult from '../tile/ToggleFlagResult'
 import Tile from '../tile/Tile'
-import ReadOnlyTile from '../tile/ReadOnlyTile'
 
 export default class LazyBoard implements IBoard {
   private readonly width: number
@@ -12,32 +11,28 @@ export default class LazyBoard implements IBoard {
 
   private readonly generator: (width: number, height: number, opened: TilePosition[], flags: TilePosition[]) => IBoard
 
-  private readonly _tiles: Tile[][]
-
   private readonly opened: TilePosition[] = []
+
+  public readonly tiles: Tile[][]
 
   constructor(
     width: number,
     height: number,
     generator: (width: number, height: number, opened: TilePosition[], flags: TilePosition[]) => IBoard
   ) {
-    this._tiles = Array.from({ length: height }, (_y, y) => Array.from({ length: width }, (_x, x) => new Tile(x, y)))
+    this.tiles = Array.from({ length: height }, (_y, y) => Array.from({ length: width }, (_x, x) => new Tile(x, y)))
     this.width = width
     this.height = height
     this.generator = generator
   }
 
-  public get tiles(): ReadOnlyTile[][] {
-    return this._tiles
-  }
-
   public clone(): IBoard {
-    const flags = this._tiles.flatMap((tt) => tt.filter((t) => t.hasFlag).map((t) => ({ x: t.x, y: t.y })))
+    const flags = this.tiles.flatMap((tt) => tt.filter((t) => t.hasFlag).map((t) => ({ x: t.x, y: t.y })))
     return this.generator(this.width, this.height, this.opened, flags)
   }
 
   public getTile(x: number, y: number): Tile {
-    return this._tiles[y][x]
+    return this.tiles[y][x]
   }
 
   // eslint-disable-next-line class-methods-use-this,@typescript-eslint/no-unused-vars

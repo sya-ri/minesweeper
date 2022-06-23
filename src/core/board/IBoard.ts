@@ -1,10 +1,9 @@
 import OpenTileResult from '../tile/OpenTileResult'
 import ToggleFlagResult from '../tile/ToggleFlagResult'
 import Tile from '../tile/Tile'
-import ReadOnlyTile from '../tile/ReadOnlyTile'
 
 export default interface IBoard {
-  tiles: ReadOnlyTile[][]
+  tiles: Tile[][]
 
   clone(): IBoard
 
