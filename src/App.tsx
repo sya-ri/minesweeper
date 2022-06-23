@@ -41,9 +41,14 @@ const App: FC = () => {
             let text: string
             let color: string = 'text-black'
             if (t.isOpen) {
-              const bomb = board.countAroundBomb(t.x, t.y)
-              text = bomb.toString()
-              color = getColor(bomb)
+              if (t.isBomb) {
+                text = 'X'
+                color = 'bg-red-400'
+              } else {
+                const bomb = board.countAroundBomb(t.x, t.y)
+                text = bomb.toString()
+                color = getColor(bomb)
+              }
             } else if (t.hasFlag) {
               text = 'X'
             } else {
