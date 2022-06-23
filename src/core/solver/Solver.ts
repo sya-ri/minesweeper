@@ -16,7 +16,7 @@ export default class Solver {
       if (t.isOpen) {
         const aroundTiles = this.board.getAroundTiles(t.x, t.y)
         const bombCount = this.board.countAroundBomb(t.x, t.y)
-        const unopenedCount = 8 - aroundTiles.filter((at) => at.isOpen).length
+        const unopenedCount = aroundTiles.filter((at) => !at.isOpen).length
         const flagCount = aroundTiles.filter((at) => at.hasFlag).length
         if (bombCount === unopenedCount) {
           // If the number of unopened tiles and bombs equals, flag each tile.
