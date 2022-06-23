@@ -11,6 +11,10 @@ export default class Board implements IBoard {
     this.tiles = tiles
   }
 
+  public get flatTiles(): Tile[] {
+    return this.tiles.flat()
+  }
+
   public clone(): Board {
     return new Board(this.tiles)
   }

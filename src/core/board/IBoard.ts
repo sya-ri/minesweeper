@@ -3,7 +3,17 @@ import ToggleFlagResult from '../tile/ToggleFlagResult'
 import Tile from '../tile/Tile'
 
 export default interface IBoard {
+  /**
+   * Get board tiles as a two-dimensional array
+   */
   tiles: Tile[][]
+
+  /**
+   * Get all board tiles
+   *
+   * @see tiles
+   */
+  flatTiles: Tile[]
 
   clone(): IBoard
 

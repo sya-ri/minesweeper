@@ -26,8 +26,12 @@ export default class LazyBoard implements IBoard {
     this.generator = generator
   }
 
+  public get flatTiles(): Tile[] {
+    return this.tiles.flat()
+  }
+
   public clone(): IBoard {
-    const flags = this.tiles.flatMap((tt) => tt.filter((t) => t.hasFlag).map((t) => ({ x: t.x, y: t.y })))
+    const flags = this.flatTiles.filter((t) => t.hasFlag).map((t) => ({ x: t.x, y: t.y }))
     return this.generator(this.width, this.height, this.opened, flags)
   }
 

@@ -80,15 +80,13 @@ const App: FC = () => {
           type="button"
           className="p-1 border border-black hover:bg-gray-200"
           onClick={() => {
-            board.tiles.forEach((tt) =>
-              tt.forEach((tile) => {
-                if (tile.isBomb) {
-                  if (!tile.hasFlag) tile.toggleFlag()
-                } else {
-                  tile.open()
-                }
-              })
-            )
+            board.flatTiles.forEach((t) => {
+              if (t.isBomb) {
+                if (!t.hasFlag) t.toggleFlag()
+              } else {
+                t.open()
+              }
+            })
             setBoard(board.clone())
           }}
         >
