@@ -3,6 +3,8 @@ import OpenTileResult from './core/tile/OpenTileResult'
 import RandomBoardGenerator from './core/generator/RandomBoardGenerator'
 import LazyBoard from './core/board/LazyBoard'
 import IBoard from './core/board/IBoard'
+import Solver from './core/solver/Solver'
+import Board from './core/board/Board'
 
 const getColor = (bomb: number): string => {
   switch (bomb) {
@@ -75,7 +77,7 @@ const App: FC = () => {
           })}
         </div>
       ))}
-      <div className="m-2 flex justify-center">
+      <div className="m-2 flex justify-center gap-2">
         <button
           type="button"
           className="p-1 border border-black hover:bg-gray-200"
@@ -91,6 +93,19 @@ const App: FC = () => {
           }}
         >
           Show Board
+        </button>
+        <button
+          type="button"
+          className="p-1 border border-black hover:bg-gray-200"
+          onClick={() => {
+            if (board instanceof Board) {
+              const solver = new Solver(board)
+              solver.solve()
+              setBoard(board.clone())
+            }
+          }}
+        >
+          Solve
         </button>
       </div>
     </div>
