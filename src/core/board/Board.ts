@@ -2,21 +2,50 @@ import Tile from '../tile/Tile'
 import TilePosition from '../tile/TilePosition'
 import OpenTileResult from '../tile/OpenTileResult'
 import ToggleFlagResult from '../tile/ToggleFlagResult'
-import IBoard from './IBoard'
+import TilesGenerator from '../generator/tile/TilesGenerator'
+import StaticTilesGenerator from '../generator/tile/StaticTilesGenerator'
+import SimpleTilesGenerator from '../generator/tile/SimpleTilesGenerator'
+import RandomBombPlacer from '../generator/bomb/RandomBombPlacer'
 
-export default class Board implements IBoard {
-  public readonly tiles: Tile[][] = []
+export default class Board {
+  private readonly width: number
 
-  constructor(tiles: Tile[][]) {
-    this.tiles = tiles
+  private readonly height: number
+
+  private readonly tilesGenerator: TilesGenerator
+
+  private _tiles: Tile[][]
+
+  constructor(width: number, height: number, tilesGenerator: TilesGenerator) {
+    this.width = width
+    this.height = height
+    this.tilesGenerator = tilesGenerator
+    if (tilesGenerator.isLazy) {
+      const blankGenerator = new SimpleTilesGenerator(new RandomBombPlacer(width, height, 0), false)
+      this._tiles = blankGenerator.generate(width, height, [])
+    } else {
+      this._tiles = tilesGenerator.generate(width, height, [])
+    }
   }
 
+  /**
+   * Get board tiles as a two-dimensional array
+   */
+  public get tiles(): Tile[][] {
+    return this._tiles
+  }
+
+  /**
+   * Get all board tiles
+   *
+   * @see tiles
+   */
   public get flatTiles(): Tile[] {
-    return this.tiles.flat()
+    return this._tiles.flat()
   }
 
   public clone(): Board {
-    return new Board(this.tiles)
+    return new Board(this.width, this.height, new StaticTilesGenerator(this.tiles))
   }
 
   /**
@@ -26,6 +55,12 @@ export default class Board implements IBoard {
     return x >= 0 && y >= 0 && y < this.tiles.length && x < this.tiles[y].length
   }
 
+  /**
+   * Get the tile of (x, y).
+   * if (x, y) is outside the board, throw an exception or return undefined.
+   *
+   * @see isInside
+   */
   public getTile(x: number, y: number): Tile {
     return this.tiles[y][x]
   }
@@ -52,11 +87,26 @@ export default class Board implements IBoard {
     return this.getAround(x, y).map((t) => this.getTile(t.x, t.y))
   }
 
+  /**
+   * Get the number of bombs around the tile.
+   */
   public countAroundBomb(x: number, y: number): number {
     return this.getAroundTiles(x, y).filter((t) => t.isBomb).length
   }
 
+  /**
+   * Open the tile of (x, y).
+   */
   public openTile(x: number, y: number): OpenTileResult {
+    if (!this.tilesGenerator.isGenerated) {
+      const blanks = []
+      for (let i = -1; i <= 1; i += 1) {
+        for (let j = -1; j <= 1; j += 1) {
+          blanks.push({ x: x + i, y: y + j })
+        }
+      }
+      this._tiles = this.tilesGenerator.generate(this.width, this.height, blanks)
+    }
     const tile = this.getTile(x, y)
     const result = tile.open()
     if (result === OpenTileResult.Success && this.countAroundBomb(x, y) === 0) {
@@ -65,6 +115,9 @@ export default class Board implements IBoard {
     return result
   }
 
+  /**
+   * Place or take the flag of (x, y).
+   */
   public toggleFlag(x: number, y: number): ToggleFlagResult {
     const tile = this.getTile(x, y)
     return tile.toggleFlag()

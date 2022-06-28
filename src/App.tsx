@@ -1,10 +1,8 @@
 import React, { FC, useState } from 'react'
 import OpenTileResult from './core/tile/OpenTileResult'
-import RandomBoardGenerator from './core/generator/RandomBoardGenerator'
-import LazyBoard from './core/board/LazyBoard'
-import IBoard from './core/board/IBoard'
 import Solver from './core/solver/Solver'
 import Board from './core/board/Board'
+import RandomTilesGenerator from './core/generator/tile/RandomTilesGenerator'
 
 const getColor = (bomb: number): string => {
   switch (bomb) {
@@ -32,7 +30,7 @@ const getColor = (bomb: number): string => {
 }
 
 const App: FC = () => {
-  const [board, setBoard] = useState<IBoard>(() => new LazyBoard(30, 16, RandomBoardGenerator(99)))
+  const [board, setBoard] = useState<Board>(new Board(30, 16, new RandomTilesGenerator(99, true)))
   return (
     <div className="mt-2">
       {board.tiles.map((tt) => (
@@ -103,11 +101,9 @@ const App: FC = () => {
           type="button"
           className="p-1 border border-black hover:bg-gray-200"
           onClick={() => {
-            if (board instanceof Board) {
-              const solver = new Solver(board)
-              solver.solve()
-              setBoard(board.clone())
-            }
+            const solver = new Solver(board)
+            solver.solve()
+            setBoard(board.clone())
           }}
         >
           Solve
