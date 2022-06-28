@@ -1,5 +1,6 @@
 import Board from '../board/Board'
 import Tile from '../tile/Tile'
+import StaticTilesGenerator from '../generator/tile/StaticTilesGenerator'
 
 export const getTileByChar = (char: string, x: number, y: number): Tile => {
   switch (char) {
@@ -10,11 +11,17 @@ export const getTileByChar = (char: string, x: number, y: number): Tile => {
   }
 }
 
+export const boardFromTiles = (tiles: Tile[][]): Board => {
+  const height = tiles.length
+  const width = height ? tiles[0].length : 0
+  return new Board(width, height, new StaticTilesGenerator(tiles))
+}
+
 export const boardFromStrings = (line: string[]): Board => {
   const tiles = line.map((text, y) => {
     return [...text].map((char, x) => getTileByChar(char, x, y))
   })
-  return new Board(tiles)
+  return boardFromTiles(tiles)
 }
 
 export const boardFromSize = (width: number, height: number): Board => {
@@ -23,7 +30,7 @@ export const boardFromSize = (width: number, height: number): Board => {
       return new Tile(x, y)
     })
   )
-  return new Board(tiles)
+  return boardFromTiles(tiles)
 }
 
 it('should works', () => {
@@ -36,14 +43,14 @@ it('should works', () => {
       'X X' //
     ])
   ).toEqual(
-    new Board([
+    boardFromTiles([
       [new Tile(0, 0), new Tile(1, 0, true), new Tile(2, 0)],
       [new Tile(0, 1), new Tile(1, 1), new Tile(2, 1, true)],
       [new Tile(0, 2, true), new Tile(1, 2), new Tile(2, 2, true)]
     ])
   )
   expect(boardFromSize(3, 4)).toEqual(
-    new Board([
+    boardFromTiles([
       [new Tile(0, 0), new Tile(1, 0), new Tile(2, 0)],
       [new Tile(0, 1), new Tile(1, 1), new Tile(2, 1)],
       [new Tile(0, 2), new Tile(1, 2), new Tile(2, 2)],

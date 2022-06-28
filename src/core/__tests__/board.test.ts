@@ -1,4 +1,3 @@
-import Board from '../board/Board'
 import OpenTileResult from '../tile/OpenTileResult'
 import { boardFromSize, boardFromStrings } from './utils'
 
@@ -8,7 +7,7 @@ it('should get the tile', () => {
 
 it('should determine whether inside of the board', () => {
   const board2x2 = boardFromSize(2, 2)
-  expect(new Board([]).isInside(0, 0)).toEqual(false)
+  expect(boardFromSize(0, 0).isInside(0, 0)).toEqual(false)
   expect(board2x2.isInside(0, 0)).toEqual(true)
   expect(board2x2.isInside(0, 1)).toEqual(true)
   expect(board2x2.isInside(1, 0)).toEqual(true)
