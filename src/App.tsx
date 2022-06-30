@@ -30,7 +30,7 @@ const getColor = (bomb: number): string => {
 }
 
 const App: FC = () => {
-  const [board, setBoard] = useState<Board>(new Board(30, 16, new RandomTilesGenerator(99, true)))
+  const [board, setBoard] = useState<Board>(new Board(30, 16, new RandomTilesGenerator(30, 16, 99, true)))
   return (
     <div className="mt-2">
       {board.tiles.map((tt) => (

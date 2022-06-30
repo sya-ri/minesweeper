@@ -3,6 +3,16 @@ import TilePosition from '../../tile/TilePosition'
 
 export default interface TilesGenerator {
   /**
+   * Width of tiles
+   */
+  readonly width: number
+
+  /**
+   * Height of tiles
+   */
+  readonly height: number
+
+  /**
    * Whether to generate a delay
    */
   readonly isLazy: boolean
@@ -15,10 +25,8 @@ export default interface TilesGenerator {
   /**
    * Generate tiles for the board
    *
-   * @param width Width of tiles
-   * @param height Height of tiles
    * @param blanks Bomb-less tiles
    * @return Tile[][]
    */
-  generate(width: number, height: number, blanks: TilePosition[]): Tile[][]
+  generate(blanks: TilePosition[]): Tile[][]
 }

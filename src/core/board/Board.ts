@@ -21,10 +21,10 @@ export default class Board {
     this.height = height
     this.tilesGenerator = tilesGenerator
     if (tilesGenerator.isLazy) {
-      const blankGenerator = new SimpleTilesGenerator(new RandomBombPlacer(width, height, 0), false)
-      this._tiles = blankGenerator.generate(width, height, [])
+      const blankGenerator = new SimpleTilesGenerator(width, height, new RandomBombPlacer(width, height, 0), false)
+      this._tiles = blankGenerator.generate([])
     } else {
-      this._tiles = tilesGenerator.generate(width, height, [])
+      this._tiles = tilesGenerator.generate([])
     }
   }
 
@@ -105,7 +105,7 @@ export default class Board {
           blanks.push({ x: x + i, y: y + j })
         }
       }
-      this._tiles = this.tilesGenerator.generate(this.width, this.height, blanks)
+      this._tiles = this.tilesGenerator.generate(blanks)
     }
     const tile = this.getTile(x, y)
     const result = tile.open()
