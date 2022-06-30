@@ -1,29 +1,32 @@
 import React, { FC, useState } from 'react'
+import { Box, Button, Flex } from '@chakra-ui/react'
+import { Token } from '@chakra-ui/styled-system/dist/declarations/src/utils'
+import * as CSS from 'csstype'
 import OpenTileResult from './core/tile/OpenTileResult'
 import Solver from './core/solver/Solver'
 import Board from './core/board/Board'
 import RandomTilesGenerator from './core/generator/tile/RandomTilesGenerator'
 
-const getColor = (bomb: number): string => {
+const getColor = (bomb: number): Token<CSS.Property.Color, 'colors'> => {
   switch (bomb) {
     case 0:
-      return 'text-white'
+      return 'white'
     case 1:
-      return 'text-blue-600'
+      return 'blue.600'
     case 2:
-      return 'text-green-600'
+      return 'green.600'
     case 3:
-      return 'text-red-600'
+      return 'red.600'
     case 4:
-      return 'text-blue-800'
+      return 'blue.800'
     case 5:
-      return 'text-red-800'
+      return 'red.800'
     case 6:
-      return 'text-cyan-600'
+      return 'cyan.600'
     case 7:
-      return 'text-black'
+      return 'black'
     case 8:
-      return 'text-gray-600'
+      return 'gray.600'
     default:
       return ''
   }
@@ -32,16 +35,16 @@ const getColor = (bomb: number): string => {
 const App: FC = () => {
   const [board, setBoard] = useState<Board>(new Board(30, 16, new RandomTilesGenerator(30, 16, 99, true)))
   return (
-    <div className="mt-2">
+    <Box mt={2}>
       {board.tiles.map((tt) => (
-        <div className="flex justify-center">
+        <Flex justify="center">
           {tt.map((t) => {
             let text: string
-            let color: string = 'text-black'
+            let color: Token<CSS.Property.Color, 'colors'> = 'black'
             if (t.isOpen) {
               if (t.isBomb) {
                 text = 'X'
-                color = 'bg-red-400'
+                color = 'red.400'
               } else {
                 const bomb = board.countAroundBomb(t.x, t.y)
                 text = bomb.toString()
@@ -53,9 +56,16 @@ const App: FC = () => {
               text = '-'
             }
             return (
-              <button
-                type="button"
-                className={`w-8 h-8 shrink-0 border ${color}`}
+              <Button
+                w={10}
+                h={10}
+                flexShrink={0}
+                color={color}
+                variant="outline"
+                rounded="none"
+                transition="none"
+                cursor={t.isOpen ? 'default' : undefined}
+                _hover={t.isOpen ? {} : undefined}
                 onClick={(event) => {
                   if (event.shiftKey) {
                     board.toggleFlag(t.x, t.y)
@@ -75,15 +85,13 @@ const App: FC = () => {
                 }}
               >
                 {text}
-              </button>
+              </Button>
             )
           })}
-        </div>
+        </Flex>
       ))}
-      <div className="m-2 flex justify-center gap-2">
-        <button
-          type="button"
-          className="p-1 border border-black hover:bg-gray-200"
+      <Flex m={2} justify="center" gap={1}>
+        <Button
           onClick={() => {
             board.flatTiles.forEach((t) => {
               if (t.isBomb) {
@@ -96,10 +104,8 @@ const App: FC = () => {
           }}
         >
           Show Board
-        </button>
-        <button
-          type="button"
-          className="p-1 border border-black hover:bg-gray-200"
+        </Button>
+        <Button
           onClick={() => {
             const solver = new Solver(board)
             solver.solve()
@@ -107,9 +113,9 @@ const App: FC = () => {
           }}
         >
           Solve
-        </button>
-      </div>
-    </div>
+        </Button>
+      </Flex>
+    </Box>
   )
 }
 
