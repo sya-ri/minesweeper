@@ -2,11 +2,11 @@ import BombPlacer from './BombPlacer'
 import TilePosition from '../../tile/TilePosition'
 
 export default class RandomBombPlacer implements BombPlacer {
-  private readonly numberOfBomb: number
+  public readonly width: number
 
-  private readonly width: number
+  public readonly height: number
 
-  private readonly height: number
+  public readonly numberOfBomb: number
 
   private readonly bombs = new Set<number>()
 
