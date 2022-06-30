@@ -10,23 +10,27 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16
-      - name: Install dependencies
+      - name: Install dependencies (web)
+        working-directory: packages/web
         run: |
           yarn
-      - name: Check lint
+      - name: Check lint (web)
+        working-directory: packages/web
         run: |
           yarn lint
-      - name: Test
+      - name: Test (web)
+        working-directory: packages/web
         run: |
           yarn test
-      - name: Build
+      - name: Build (web)
+        working-directory: packages/web
         run: |
           yarn build
-      - name: Upload artifact
+      - name: Upload artifact (web)
         uses: actions/upload-artifact@v3
         with:
           name: Build output
-          path: dist
+          path: packages/web/dist
   deploy:
     runs-on: ubuntu-latest
     needs: [build]

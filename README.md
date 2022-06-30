@@ -1,6 +1,5 @@
 # minesweeper
 
-## Dependencies
+## 📦 Packages
 
-- [Vite](https://vitejs.dev)
-- [Tailwind CSS](https://tailwindcss.com)
+- 🌏 [**web**](packages/web)
