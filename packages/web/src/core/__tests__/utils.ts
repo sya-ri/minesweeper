@@ -12,9 +12,7 @@ export const getTileByChar = (char: string, x: number, y: number): Tile => {
 }
 
 export const boardFromTiles = (tiles: Tile[][]): Board => {
-  const height = tiles.length
-  const width = height ? tiles[0].length : 0
-  return new Board(width, height, new StaticTilesGenerator(tiles))
+  return new Board(new StaticTilesGenerator(tiles))
 }
 
 export const boardFromStrings = (line: string[]): Board => {

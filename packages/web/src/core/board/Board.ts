@@ -8,20 +8,16 @@ import SimpleTilesGenerator from '../generator/tile/SimpleTilesGenerator'
 import RandomBombPlacer from '../generator/bomb/RandomBombPlacer'
 
 export default class Board {
-  private readonly width: number
-
-  private readonly height: number
-
   private readonly tilesGenerator: TilesGenerator
 
   private _tiles: Tile[][]
 
-  constructor(width: number, height: number, tilesGenerator: TilesGenerator) {
-    this.width = width
-    this.height = height
+  constructor(tilesGenerator: TilesGenerator) {
     this.tilesGenerator = tilesGenerator
     if (tilesGenerator.isLazy) {
-      const blankGenerator = new SimpleTilesGenerator(width, height, new RandomBombPlacer(width, height, 0), false)
+      const { width, height } = tilesGenerator
+      const bombPlacer = new RandomBombPlacer(width, height, 0)
+      const blankGenerator = new SimpleTilesGenerator(width, height, bombPlacer, false)
       this._tiles = blankGenerator.generate([])
     } else {
       this._tiles = tilesGenerator.generate([])
@@ -45,7 +41,7 @@ export default class Board {
   }
 
   public clone(): Board {
-    return new Board(this.width, this.height, new StaticTilesGenerator(this.tiles))
+    return new Board(new StaticTilesGenerator(this.tiles))
   }
 
   /**
