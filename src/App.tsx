@@ -1,13 +1,11 @@
 import React, { FC, useState } from 'react'
 import { Box, Button, Flex } from '@chakra-ui/react'
-import { Token } from '@chakra-ui/styled-system/dist/declarations/src/utils'
-import * as CSS from 'csstype'
 import OpenTileResult from './core/tile/OpenTileResult'
 import Solver from './core/solver/Solver'
 import Board from './core/board/Board'
 import RandomTilesGenerator from './core/generator/tile/RandomTilesGenerator'
 
-const getColor = (bomb: number): Token<CSS.Property.Color, 'colors'> => {
+const getColor = (bomb: number) => {
   switch (bomb) {
     case 0:
       return 'white'
@@ -40,7 +38,7 @@ const App: FC = () => {
         <Flex justify="center">
           {tt.map((t) => {
             let text: string
-            let color: Token<CSS.Property.Color, 'colors'> = 'black'
+            let color = 'black'
             if (t.isOpen) {
               if (t.isBomb) {
                 text = 'X'
