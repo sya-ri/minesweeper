@@ -1,7 +1,8 @@
 {
-  "name": "minesweeper",
-  "private": true,
+  "name": "minesweeper-web",
   "version": "0.1.0",
+  "author": "sya-ri",
+  "private": true,
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
