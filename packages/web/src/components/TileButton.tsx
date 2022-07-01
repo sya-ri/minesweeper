@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { Button } from '@chakra-ui/react'
-import Tile from '../core/tile/Tile'
+import Tile from '../core/Tile'
 
 const getTileDisplay = (tile: Tile, countAroundBomb: () => number): { text: string; color: string } => {
   if (tile.isOpen) {

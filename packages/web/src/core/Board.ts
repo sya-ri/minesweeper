@@ -1,11 +1,8 @@
-import Tile from '../tile/Tile'
-import TilePosition from '../tile/TilePosition'
-import OpenTileResult from '../tile/OpenTileResult'
-import ToggleFlagResult from '../tile/ToggleFlagResult'
-import TilesGenerator from '../generator/tile/TilesGenerator'
-import StaticTilesGenerator from '../generator/tile/StaticTilesGenerator'
-import SimpleTilesGenerator from '../generator/tile/SimpleTilesGenerator'
-import RandomBombPlacer from '../generator/bomb/RandomBombPlacer'
+import Tile, { OpenTileResult, TilePosition, ToggleFlagResult } from './Tile'
+import TilesGenerator from './generator/tile/TilesGenerator'
+import StaticTilesGenerator from './generator/tile/StaticTilesGenerator'
+import SimpleTilesGenerator from './generator/tile/SimpleTilesGenerator'
+import RandomBombPlacer from './generator/bomb/RandomBombPlacer'
 
 export default class Board {
   private readonly tilesGenerator: TilesGenerator

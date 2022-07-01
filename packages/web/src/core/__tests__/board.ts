@@ -1,4 +1,4 @@
-import OpenTileResult from '../tile/OpenTileResult'
+import { OpenTileResult } from '../Tile'
 import { boardFromSize, boardFromStrings } from './utils'
 
 it('should get the tile', () => {

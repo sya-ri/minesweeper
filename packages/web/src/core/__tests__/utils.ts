@@ -1,5 +1,5 @@
-import Board from '../board/Board'
-import Tile from '../tile/Tile'
+import Board from '../Board'
+import Tile from '../Tile'
 import StaticTilesGenerator from '../generator/tile/StaticTilesGenerator'
 
 export const getTileByChar = (char: string, x: number, y: number): Tile => {

@@ -1,5 +1,5 @@
 import BombPlacer from './BombPlacer'
-import TilePosition from '../../tile/TilePosition'
+import { TilePosition } from '../../Tile'
 
 export default class RandomBombPlacer implements BombPlacer {
   public readonly width: number

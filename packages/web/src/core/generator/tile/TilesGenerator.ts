@@ -1,5 +1,4 @@
-import Tile from '../../tile/Tile'
-import TilePosition from '../../tile/TilePosition'
+import Tile, { TilePosition } from '../../Tile'
 
 export default interface TilesGenerator {
   /**

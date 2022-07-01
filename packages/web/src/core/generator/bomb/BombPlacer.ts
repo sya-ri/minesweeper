@@ -1,4 +1,4 @@
-import TilePosition from '../../tile/TilePosition'
+import { TilePosition } from '../../Tile'
 
 export default interface BombPlacer {
   init(blanks: TilePosition[]): void

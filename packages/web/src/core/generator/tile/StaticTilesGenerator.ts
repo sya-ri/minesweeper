@@ -1,5 +1,5 @@
 import TilesGenerator from './TilesGenerator'
-import Tile from '../../tile/Tile'
+import Tile from '../../Tile'
 
 export default class StaticTilesGenerator implements TilesGenerator {
   private readonly tiles: Tile[][]

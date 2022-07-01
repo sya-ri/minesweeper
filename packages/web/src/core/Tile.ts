@@ -1,6 +1,19 @@
-import OpenTileResult from './OpenTileResult'
-import TilePosition from './TilePosition'
-import ToggleFlagResult from './ToggleFlagResult'
+export enum OpenTileResult {
+  Success,
+  GameOver,
+  Failure
+}
+
+export enum ToggleFlagResult {
+  Place,
+  Take,
+  Failure
+}
+
+export interface TilePosition {
+  x: number
+  y: number
+}
 
 export default class Tile {
   public readonly x: number

@@ -1,6 +1,6 @@
 import SimplexNoise from 'simplex-noise'
 import RandomBombPlacer from './RandomBombPlacer'
-import TilePosition from '../../tile/TilePosition'
+import { TilePosition } from '../../Tile'
 
 export default class RandomWithSimplexNoiseBombPlacer extends RandomBombPlacer {
   private readonly step: number

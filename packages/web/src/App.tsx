@@ -1,8 +1,8 @@
 import React, { FC, useState } from 'react'
 import { Box, Button, Center, Flex } from '@chakra-ui/react'
-import OpenTileResult from './core/tile/OpenTileResult'
+import { OpenTileResult } from './core/Tile'
 import Solver from './core/solver/Solver'
-import Board from './core/board/Board'
+import Board from './core/Board'
 import RandomTilesGenerator from './core/generator/tile/RandomTilesGenerator'
 import TileButton from './components/TileButton'
 

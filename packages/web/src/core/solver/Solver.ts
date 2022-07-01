@@ -1,4 +1,4 @@
-import Board from '../board/Board'
+import Board from '../Board'
 
 export default class Solver {
   private board: Board

@@ -1,6 +1,5 @@
 import TilesGenerator from './TilesGenerator'
-import Tile from '../../tile/Tile'
-import TilePosition from '../../tile/TilePosition'
+import Tile, { TilePosition } from '../../Tile'
 import BombPlacer from '../bomb/BombPlacer'
 
 export default class SimpleTilesGenerator implements TilesGenerator {
