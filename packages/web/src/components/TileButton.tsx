@@ -38,8 +38,9 @@ const TileButton: FC<TileButtonProps> = ({ tile, countAroundBomb, openTile, togg
   const { text, color } = getTileDisplay(tile, countAroundBomb)
   return (
     <Button
-      w={10}
-      h={10}
+      w={8}
+      h={8}
+      size="sm"
       flexShrink={0}
       color={color}
       variant="outline"
