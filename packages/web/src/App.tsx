@@ -1,9 +1,9 @@
 import React, { FC, useState } from 'react'
 import { Box, Button, Center, Flex } from '@chakra-ui/react'
-import { OpenTileResult } from './core/Tile'
-import Solver from './core/solver/Solver'
-import Board from './core/Board'
-import RandomTilesGenerator from './core/generator/tile/RandomTilesGenerator'
+import { OpenTileResult } from 'minesweeper-core/dist/Tile'
+import Solver from 'minesweeper-core/dist/solver/Solver'
+import Board from 'minesweeper-core/dist/Board'
+import RandomTilesGenerator from 'minesweeper-core/dist/generator/tile/RandomTilesGenerator'
 import TileButton from './components/TileButton'
 
 const App: FC = () => {

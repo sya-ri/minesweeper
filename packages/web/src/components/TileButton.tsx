@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { Button } from '@chakra-ui/react'
-import Tile from '../core/Tile'
+import Tile from 'minesweeper-core/dist/Tile'
 
 const getTileDisplay = (tile: Tile, countAroundBomb: () => number): { text: string; color: string } => {
   if (tile.isOpen) {
