@@ -2,38 +2,24 @@ import React, { FC } from 'react'
 import { Button } from '@chakra-ui/react'
 import Tile from '../core/tile/Tile'
 
-const getColor = (bomb: number) => {
-  switch (bomb) {
-    case 0:
-      return 'white'
-    case 1:
-      return 'blue.600'
-    case 2:
-      return 'green.600'
-    case 3:
-      return 'red.600'
-    case 4:
-      return 'blue.800'
-    case 5:
-      return 'red.800'
-    case 6:
-      return 'cyan.600'
-    case 7:
-      return 'black'
-    case 8:
-      return 'gray.600'
-    default:
-      return ''
-  }
-}
-
 const getTileDisplay = (tile: Tile, countAroundBomb: () => number): { text: string; color: string } => {
   if (tile.isOpen) {
     if (tile.isBomb) {
       return { text: 'X', color: 'red.400' }
     }
     const bomb = countAroundBomb()
-    return { text: bomb.toString(), color: getColor(bomb) }
+    const colors = [
+      'white', // 0
+      'blue.600', // 1
+      'green.600', // 2
+      'red.600', // 3
+      'blue.800', // 4
+      'red.800', // 5
+      'cyan.600', // 6
+      'black', // 7
+      'gray.600' // 8
+    ]
+    return { text: bomb.toString(), color: colors[bomb] }
   }
   if (tile.hasFlag) {
     return { text: 'X', color: 'black' }
