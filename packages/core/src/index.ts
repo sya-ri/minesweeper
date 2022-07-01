@@ -1,3 +1,5 @@
+/* eslint import/export: off */
+
 export * from './Board'
 export * from './Tile'
 export * from './generator/bomb/BombPlacer'

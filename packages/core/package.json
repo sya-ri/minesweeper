@@ -3,19 +3,32 @@
   "version": "0.1.0",
   "author": "sya-ri",
   "private": true,
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "tsc",
-    "test": "jest"
+    "build": "tsc -p tsconfig.build.json",
+    "test": "jest",
+    "lint": "eslint src",
+    "lint:fix": "eslint src --fix"
   },
   "dependencies": {
     "simplex-noise": "^3.0.1"
   },
   "devDependencies": {
     "@types/jest": "^28.1.3",
+    "@typescript-eslint/eslint-plugin": "^5.30.0",
+    "@typescript-eslint/parser": "^5.30.0",
+    "eslint": "^7.32.0 || ^8.2.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-airbnb-typescript": "^17.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-prettier": "^4.2.1",
     "jest": "^28.1.1",
+    "prettier": "^2.7.1",
     "ts-jest": "^28.0.5",
     "typescript": "^4.7.4"
   }
