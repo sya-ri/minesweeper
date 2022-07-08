@@ -10,32 +10,16 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16
-      - name: Install dependencies (core)
-        working-directory: packages/core
+      - name: Install dependencies
         run: |
-          yarn
-      - name: Check lint (core)
-        working-directory: packages/core
+          yarn install-dependencies
+      - name: Check lint
         run: |
           yarn lint
-      - name: Test (core)
-        working-directory: packages/core
+      - name: Test
         run: |
           yarn test
-      - name: Build (core)
-        working-directory: packages/core
-        run: |
-          yarn build
-      - name: Install dependencies (web)
-        working-directory: packages/web
-        run: |
-          yarn
-      - name: Check lint (web)
-        working-directory: packages/web
-        run: |
-          yarn lint
-      - name: Build (web)
-        working-directory: packages/web
+      - name: Build
         run: |
           yarn build
       - name: Upload artifact (web)

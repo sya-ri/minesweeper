@@ -1,0 +1,16 @@
+{
+  "name": "minesweeper",
+  "version": "0.1.0",
+  "repository": "https://github.com/sya-ri/minesweeper.git",
+  "author": "sya-ri",
+  "scripts": {
+    "install-dependencies": "yarn --cwd packages/core && yarn --cwd packages/analytics && yarn --cwd packages/web",
+    "lint": "yarn --cwd packages/core lint && yarn --cwd packages/analytics lint && yarn --cwd packages/web lint",
+    "lint:fix": "yarn --cwd packages/core lint:fix && yarn --cwd packages/analytics lint:fix && yarn --cwd packages/web lint:fix",
+    "test": "yarn --cwd packages/core test",
+    "build": "yarn --cwd packages/core build && yarn --cwd packages/web build",
+    "analytics:run": "yarn --cwd packages/analytics run",
+    "web:dev": "yarn --cwd packages/web dev",
+    "web:preview": "yarn --cwd packages/web preview"
+  }
+}

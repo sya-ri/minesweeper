@@ -1,9 +1,9 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="web: preview" type="js.build_tools.npm">
-    <package-json value="$PROJECT_DIR$/packages/web/package.json" />
+  <configuration default="false" name="web:preview" type="js.build_tools.npm" nameIsGenerated="true">
+    <package-json value="$PROJECT_DIR$/package.json" />
     <command value="run" />
     <scripts>
-      <script value="preview" />
+      <script value="web:preview" />
     </scripts>
     <node-interpreter value="project" />
     <envs />

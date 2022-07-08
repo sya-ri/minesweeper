@@ -1,9 +1,9 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="analytics: run" type="js.build_tools.npm">
-    <package-json value="$PROJECT_DIR$/packages/analytics/package.json" />
+  <configuration default="false" name="analytics:run" type="js.build_tools.npm" nameIsGenerated="true">
+    <package-json value="$PROJECT_DIR$/package.json" />
     <command value="run" />
     <scripts>
-      <script value="run" />
+      <script value="analytics:run" />
     </scripts>
     <node-interpreter value="project" />
     <envs />
