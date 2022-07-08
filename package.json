@@ -9,7 +9,7 @@
     "lint": "yarn --cwd packages/core lint && yarn --cwd packages/analytics lint && yarn --cwd packages/web lint",
     "lint:fix": "yarn --cwd packages/core lint:fix && yarn --cwd packages/analytics lint:fix && yarn --cwd packages/web lint:fix",
     "test": "yarn --cwd packages/core test",
-    "build": "yarn --cwd packages/core build && yarn --cwd packages/web build",
+    "build": "yarn --cwd packages/core build && yarn --cwd packages/web && yarn --cwd packages/web build",
     "analytics:start": "yarn --cwd packages/analytics start",
     "web:dev": "yarn --cwd packages/web dev",
     "web:preview": "yarn --cwd packages/web preview"
