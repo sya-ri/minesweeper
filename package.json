@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "repository": "https://github.com/sya-ri/minesweeper.git",
   "author": "sya-ri",
+  "license": "MIT",
   "scripts": {
     "install-dependencies": "yarn --cwd packages/core && yarn --cwd packages/analytics && yarn --cwd packages/web",
     "lint": "yarn --cwd packages/core lint && yarn --cwd packages/analytics lint && yarn --cwd packages/web lint",
