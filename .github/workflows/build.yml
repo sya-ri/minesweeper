@@ -11,17 +11,13 @@ jobs:
         with:
           node-version: 16
       - name: Install dependencies
-        run: |
-          yarn install-dependencies
+        run: yarn install-dependencies
       - name: Check lint
-        run: |
-          yarn lint
+        run: yarn lint
       - name: Test
-        run: |
-          yarn test
+        run: yarn test
       - name: Build
-        run: |
-          yarn build
+        run: yarn build
       - name: Upload artifact (web)
         uses: actions/upload-artifact@v3
         with:
