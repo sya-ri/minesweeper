@@ -6,6 +6,6 @@
 # Install dependencies
 yarn
 
-# Run
-yarn run
+# Run analytics
+yarn start
 ```
