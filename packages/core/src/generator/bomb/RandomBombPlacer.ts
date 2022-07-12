@@ -1,5 +1,6 @@
 import BombPlacer from './BombPlacer'
 import { TilePosition } from '../../Tile'
+import shuffle from '../../util/shuffle'
 
 export default class RandomBombPlacer implements BombPlacer {
   public readonly width: number
@@ -17,13 +18,17 @@ export default class RandomBombPlacer implements BombPlacer {
   }
 
   public init(blanks: TilePosition[]) {
-    while (this.bombs.size < this.numberOfBomb) {
-      const x = Math.floor(Math.random() * this.width)
-      const y = Math.floor(Math.random() * this.height)
-      if (!blanks.some((t) => t.x === x && t.y === y)) {
-        this.bombs.add(x * this.height + y)
-      }
-    }
+    const positions: TilePosition[] = []
+    Array.from(Array(this.width).keys()).forEach((x) => {
+      Array.from(Array(this.height).keys()).forEach((y) => {
+        if (!blanks.some((t) => t.x === x && t.y === y)) {
+          positions.push({ x, y })
+        }
+      })
+    })
+    shuffle(positions)
+      .slice(0, this.numberOfBomb)
+      .forEach(({ x, y }) => this.bombs.add(x * this.height + y))
   }
 
   public hasBomb(x: number, y: number): boolean {
