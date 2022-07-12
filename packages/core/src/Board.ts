@@ -22,6 +22,20 @@ export default class Board {
   }
 
   /**
+   * Get board width
+   */
+  public get width(): number {
+    return this.tilesGenerator.width
+  }
+
+  /**
+   * Get board height
+   */
+  public get height(): number {
+    return this.tilesGenerator.height
+  }
+
+  /**
    * Get board tiles as a two-dimensional array
    */
   public get tiles(): Tile[][] {
