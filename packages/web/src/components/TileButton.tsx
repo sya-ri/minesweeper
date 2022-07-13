@@ -32,9 +32,10 @@ export type TileButtonProps = {
   countAroundBomb: () => number
   openTile: () => void
   toggleFlag: () => void
+  isGameOver: boolean
 }
 
-const TileButton: FC<TileButtonProps> = ({ tile, countAroundBomb, openTile, toggleFlag }) => {
+const TileButton: FC<TileButtonProps> = ({ tile, countAroundBomb, openTile, toggleFlag, isGameOver }) => {
   const { text, color } = getTileDisplay(tile, countAroundBomb)
   return (
     <Button
@@ -46,9 +47,10 @@ const TileButton: FC<TileButtonProps> = ({ tile, countAroundBomb, openTile, togg
       variant="outline"
       rounded="none"
       transition="none"
-      cursor={tile.isOpen ? 'default' : undefined}
-      _hover={tile.isOpen ? {} : undefined}
+      cursor={tile.isOpen || isGameOver ? 'default' : undefined}
+      _hover={tile.isOpen || isGameOver ? {} : undefined}
       onClick={(event) => {
+        if (isGameOver) return
         if (event.shiftKey) {
           toggleFlag()
         } else {
@@ -56,6 +58,7 @@ const TileButton: FC<TileButtonProps> = ({ tile, countAroundBomb, openTile, togg
         }
       }}
       onContextMenu={(event) => {
+        if (isGameOver) return
         event.preventDefault()
         toggleFlag()
       }}

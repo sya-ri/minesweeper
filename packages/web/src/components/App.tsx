@@ -1,19 +1,26 @@
-import React, { FC, useState } from 'react'
-import { Box, Button, Center, Flex } from '@chakra-ui/react'
-import { OpenTileResult, TilePosition } from 'minesweeper-core/dist/Tile'
+import React, { FC, useEffect, useState } from 'react'
+import { Box, Button, Center, Flex, useDisclosure } from '@chakra-ui/react'
+import { TilePosition } from 'minesweeper-core/dist/Tile'
 import Solver from 'minesweeper-core/dist/solver/Solver'
 import Board from 'minesweeper-core/dist/Board'
 import RandomTilesGenerator from 'minesweeper-core/dist/generator/tile/RandomTilesGenerator'
 import BoardView from './BoardView'
+import GameOverModal from './GameOverModal'
 
 const App: FC = () => {
   const [board, setBoard] = useState<Board>(new Board(new RandomTilesGenerator(30, 16, 99, true)))
-  const openTile = (tile: TilePosition) => {
-    const result = board.openTile(tile.x, tile.y)
-    if (result === OpenTileResult.GameOver) {
-      alert('Game Over') // eslint-disable-line no-alert
-      window.location.reload()
+  const [isGameOver, setGameOver] = useState(false)
+  const { isOpen: isOpenGameOverModal, onOpen: onOpenGameOverModal, onClose: onCloseGameOverModal } = useDisclosure()
+  useEffect(() => {
+    setGameOver(board.flatTiles.some((t) => t.isOpen && t.isBomb))
+  }, [board])
+  useEffect(() => {
+    if (isGameOver) {
+      onOpenGameOverModal()
     }
+  }, [isGameOver, onOpenGameOverModal])
+  const openTile = (tile: TilePosition) => {
+    board.openTile(tile.x, tile.y)
     setBoard(board.clone())
   }
   const toggleFlag = (tile: TilePosition) => {
@@ -22,8 +29,9 @@ const App: FC = () => {
   }
   return (
     <Box m={2}>
+      <GameOverModal onClose={onCloseGameOverModal} isOpen={isOpenGameOverModal} />
       <Center overflow="auto">
-        <BoardView board={board} openTile={openTile} toggleFlag={toggleFlag} />
+        <BoardView board={board} openTile={openTile} toggleFlag={toggleFlag} isGameOver={isGameOver} />
       </Center>
       <Flex m={2} justify="center" gap={1}>
         <Button

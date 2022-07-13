@@ -8,9 +8,10 @@ export type BoardViewProps = {
   board: Board
   openTile: (tile: TilePosition) => void
   toggleFlag: (tile: TilePosition) => void
+  isGameOver: boolean
 }
 
-const BoardView: FC<BoardViewProps> = ({ board, openTile, toggleFlag }) => {
+const BoardView: FC<BoardViewProps> = ({ board, openTile, toggleFlag, isGameOver }) => {
   return (
     <Box maxW="full">
       {board.tiles.map((tt) => (
@@ -21,6 +22,7 @@ const BoardView: FC<BoardViewProps> = ({ board, openTile, toggleFlag }) => {
               countAroundBomb={() => board.countAroundBomb(tile.x, tile.y)}
               openTile={() => openTile(tile.position)}
               toggleFlag={() => toggleFlag(tile.position)}
+              isGameOver={isGameOver}
             />
           ))}
         </Flex>
