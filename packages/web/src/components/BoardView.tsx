@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { Box, Flex } from '@chakra-ui/react'
-import { OpenTileResult, TilePosition } from 'minesweeper-core/dist/Tile'
+import { TilePosition } from 'minesweeper-core/dist/Tile'
 import Board from 'minesweeper-core/dist/Board'
 import TileButton from './TileButton'
 
