@@ -4,7 +4,7 @@ import { OpenTileResult } from 'minesweeper-core/dist/Tile'
 import Solver from 'minesweeper-core/dist/solver/Solver'
 import Board from 'minesweeper-core/dist/Board'
 import RandomTilesGenerator from 'minesweeper-core/dist/generator/tile/RandomTilesGenerator'
-import TileButton from './components/TileButton'
+import TileButton from './TileButton'
 
 const App: FC = () => {
   const [board, setBoard] = useState<Board>(new Board(new RandomTilesGenerator(30, 16, 99, true)))
