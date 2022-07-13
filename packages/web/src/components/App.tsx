@@ -8,7 +8,8 @@ import BoardView from './BoardView'
 import GameOverModal from './GameOverModal'
 
 const App: FC = () => {
-  const [board, setBoard] = useState<Board>(new Board(new RandomTilesGenerator(30, 16, 99, true)))
+  const generateTiles = () => new RandomTilesGenerator(30, 16, 99, true)
+  const [board, setBoard] = useState(new Board(generateTiles()))
   const [isGameOver, setGameOver] = useState(false)
   const { isOpen: isOpenGameOverModal, onOpen: onOpenGameOverModal, onClose: onCloseGameOverModal } = useDisclosure()
   useEffect(() => {
@@ -34,6 +35,7 @@ const App: FC = () => {
         <BoardView board={board} openTile={openTile} toggleFlag={toggleFlag} isGameOver={isGameOver} />
       </Center>
       <Flex m={2} justify="center" gap={1}>
+        <Button onClick={() => setBoard(new Board(generateTiles()))}>Regenerate</Button>
         <Button
           onClick={() => {
             board.flatTiles.forEach((t) => {
