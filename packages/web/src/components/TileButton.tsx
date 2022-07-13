@@ -49,6 +49,7 @@ const TileButton: FC<TileButtonProps> = ({ tile, countAroundBomb, openTile, togg
       transition="none"
       cursor={tile.isOpen || isGameOver ? 'default' : undefined}
       _hover={tile.isOpen || isGameOver ? {} : undefined}
+      _active={tile.isOpen || isGameOver ? {} : undefined}
       onClick={(event) => {
         if (isGameOver) return
         if (event.shiftKey) {
