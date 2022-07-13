@@ -1,21 +1,21 @@
 type AnalyzeResult = {
   /**
-   * タイル数
+   * Number of tiles on the board
    */
   tiles: number
 
   /**
-   * 開かれなかったタイル数
+   * Number of tiles that couldn't be opened using Solver
    */
   unopenedTiles: number
 
   /**
-   * 周囲に爆弾がないタイルの数
+   * Number of tiles with no bombs around (tiles whose countAroundBomb equals 0)
    */
   zeroBombTiles: number
 
   /**
-   * 周囲を爆弾に囲まれているタイルの数
+   * Number of tiles that have only bombs around (tiles whose countAroundBomb equals the size of getAroundTiles)
    */
   eightBombTiles: number
 }

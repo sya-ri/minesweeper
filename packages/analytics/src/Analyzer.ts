@@ -31,6 +31,8 @@ export default class Analyzer {
     const sumResult = Array.from({ length: loopCount })
       .map(() => this.run())
       .reduce((previousValue, currentValue) => {
+        // Calculate the sum to calculate the average.
+        // However, don't need to calculate the average as all the AnalyzeResult#tiles are the same.
         return {
           tiles: currentValue.tiles,
           unopenedTiles: previousValue.unopenedTiles + currentValue.unopenedTiles,
