@@ -45,10 +45,4 @@ export default class Analyzer {
       eightBombTiles: sumResult.eightBombTiles / loopCount
     }
   }
-
-  public static getScore(result: AnalyzeResult): number {
-    let score = 0
-    score += 1 - result.unopenedTiles / result.tiles
-    return score
-  }
 }
