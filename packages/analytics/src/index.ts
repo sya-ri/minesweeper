@@ -15,6 +15,7 @@ const analyze = (
 ) => {
   const analyzer = new Analyzer(() => {
     const board = new Board(tilesGenerator())
+    // Open the center tile to be able to run Solver.
     board.openTile(Math.floor(board.width / 2), Math.floor(board.height / 2))
     return board
   })

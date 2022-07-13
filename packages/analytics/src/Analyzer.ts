@@ -9,6 +9,9 @@ export default class Analyzer {
     this.generateBoard = generateBoard
   }
 
+  /**
+   * Generate a new board and analyze the results
+   */
   public run(): AnalyzeResult {
     const board = this.generateBoard()
     return {
@@ -19,6 +22,11 @@ export default class Analyzer {
     }
   }
 
+  /**
+   * Solve until no longer solve
+   *
+   * @see AnalyzeResult#unopenedTiles
+   */
   private static solve(board: Board): number {
     const solver = new Solver(board)
     while (solver.solve()) {
@@ -27,6 +35,11 @@ export default class Analyzer {
     return board.flatTiles.filter((tile) => !tile.isOpen && !tile.isBomb).length
   }
 
+  /**
+   * Iteratively analyze and returns the average result
+   *
+   * @see Analyzer#run
+   */
   public runAverage(loopCount: number): AnalyzeResult {
     const sumResult = Array.from({ length: loopCount })
       .map(() => this.run())
