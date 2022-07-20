@@ -54,6 +54,9 @@ const App: FC = () => {
         <Button onClick={() => setBoard(new Board(generateTiles()))}>Regenerate</Button>
         <Button
           onClick={() => {
+            if (!board.isGenerated) {
+              board.openTile(Math.floor(board.width / 2), Math.floor(board.height / 2))
+            }
             board.flatTiles.forEach((t) => {
               if (t.isBomb) {
                 if (!t.hasFlag) t.toggleFlag()

@@ -22,6 +22,13 @@ export default class Board {
   }
 
   /**
+   * Get whether board is generated
+   */
+  public get isGenerated(): boolean {
+    return this.tilesGenerator.isGenerated
+  }
+
+  /**
    * Get board width
    */
   public get width(): number {
