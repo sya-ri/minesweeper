@@ -5,13 +5,24 @@
   "author": "sya-ri",
   "license": "MIT",
   "scripts": {
-    "install-dependencies": "yarn --cwd packages/core && yarn --cwd packages/analytics && yarn --cwd packages/web",
-    "lint": "yarn --cwd packages/core lint && yarn --cwd packages/analytics lint && yarn --cwd packages/web lint",
-    "lint:fix": "yarn --cwd packages/core lint:fix && yarn --cwd packages/analytics lint:fix && yarn --cwd packages/web lint:fix",
-    "test": "yarn --cwd packages/core test",
-    "build": "yarn --cwd packages/core build && yarn --cwd packages/analytics add ../core --check-files && yarn --cwd packages/web add ../core --check-files && yarn --cwd packages/web build",
-    "analytics:start": "yarn --cwd packages/analytics start",
-    "web:dev": "yarn --cwd packages/web dev",
-    "web:preview": "yarn --cwd packages/web preview"
+    "setup": "yarn core && yarn core:build && yarn analytics && yarn web",
+    "lint": "yarn core:lint && yarn analytics:lint && yarn web:lint",
+    "lint-fix": "yarn core:lint-fix && yarn analytics:lint-fix && yarn web:lint-fix",
+    "test": "yarn core:test",
+    "core": "yarn --cwd packages/core",
+    "core:build": "yarn core build",
+    "core:test": "yarn core test",
+    "core:lint": "yarn core lint",
+    "core:lint-fix": "yarn core lint-fix",
+    "analytics": "yarn --cwd packages/analytics",
+    "analytics:start": "yarn analytics start",
+    "analytics:lint": "yarn analytics lint",
+    "analytics:lint-fix": "yarn analytics lint-fix",
+    "web": "yarn --cwd packages/web",
+    "web:dev": "yarn web dev",
+    "web:build": "yarn web build",
+    "web:preview": "yarn web preview",
+    "web:lint": "yarn web lint",
+    "web:lint-fix": "yarn web lint-fix"
   }
 }

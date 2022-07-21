@@ -11,13 +11,20 @@ jobs:
         with:
           node-version: 16
       - name: Install dependencies
-        run: yarn install-dependencies
-      - name: Check lint
-        run: yarn lint
+        run: yarn setup
       - name: Test
-        run: yarn test
-      - name: Build
-        run: yarn build
+        run: |
+          yarn lint
+          yarn test
+      - name: Run analytics
+        run: yarn analytics:start
+      - name: Build (web)
+        run: yarn web:build
+      - name: Upload artifact (analytics)
+        uses: actions/upload-artifact@v3
+        with:
+          name: Analytics result
+          path: packages/analytics/dist
       - name: Upload artifact (web)
         uses: actions/upload-artifact@v3
         with:
