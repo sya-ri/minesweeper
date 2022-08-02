@@ -32,6 +32,13 @@ export default class Tile {
     this.isBomb = isBomb
   }
 
+  public clone(): Tile {
+    const tile = new Tile(this.x, this.y, this.isBomb)
+    tile._isOpen = this._isOpen // eslint-disable-line no-underscore-dangle
+    tile._hasFlag = this._hasFlag // eslint-disable-line no-underscore-dangle
+    return tile
+  }
+
   /**
    * Get (x, y).
    */

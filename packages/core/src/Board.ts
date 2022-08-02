@@ -66,7 +66,7 @@ export default class Board {
   }
 
   public clone(): Board {
-    return new Board(new StaticTilesGenerator(this.tiles))
+    return new Board(new StaticTilesGenerator(this.tiles.map((tt) => tt.map((t) => t.clone()))))
   }
 
   /**
