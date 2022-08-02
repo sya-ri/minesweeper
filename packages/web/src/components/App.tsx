@@ -3,6 +3,7 @@ import { Box, Button, Center, Flex, NumberInput, NumberInputField, useDisclosure
 import { TilePosition } from 'minesweeper-core/dist/Tile'
 import Solver from 'minesweeper-core/dist/solver/Solver'
 import Board from 'minesweeper-core/dist/Board'
+import BombSwapper from 'minesweeper-core/dist/swapper/BombSwapper'
 import RandomTilesGenerator from 'minesweeper-core/dist/generator/tile/RandomTilesGenerator'
 import RandomWithSimplexNoiseTilesGenerator from 'minesweeper-core/dist/generator/tile/RandomWithSimplexNoiseTilesGenerator'
 import BoardView from './BoardView'
@@ -77,6 +78,15 @@ const App: FC = () => {
           }}
         >
           Solve
+        </Button>
+        <Button
+          onClick={() => {
+            const swapper = new BombSwapper(board)
+            swapper.swap()
+            setBoard(board.clone())
+          }}
+        >
+          Swap
         </Button>
       </Flex>
     </Box>
