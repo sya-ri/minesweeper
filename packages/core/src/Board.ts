@@ -22,6 +22,13 @@ export default class Board {
   }
 
   /**
+   * Get whether board is solved
+   */
+  public get isSolved(): boolean {
+    return this.flatTiles.every((t) => t.isOpen || !t.isBomb)
+  }
+
+  /**
    * Get whether board is generated
    */
   public get isGenerated(): boolean {
