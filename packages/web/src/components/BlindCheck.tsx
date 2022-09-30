@@ -44,7 +44,13 @@ const BlindCheck: FC = () => {
   }
   return (
     <Box m={2}>
-      <GameOverModal onClose={onCloseGameOverModal} isOpen={isOpenGameOverModal} />
+      <GameOverModal
+        onClose={() => {
+          onCloseGameOverModal()
+          setEndTime(new Date())
+        }}
+        isOpen={isOpenGameOverModal}
+      />
       <Center overflow="auto">
         <BoardView board={board} openTile={openTile} toggleFlag={toggleFlag} isGameOver={isGameOver} />
       </Center>
@@ -58,16 +64,7 @@ const BlindCheck: FC = () => {
             setBoard(new Board(generateTiles()))
           }}
         >
-          Regenerate
-        </Button>
-        <Button
-          onClick={() => {
-            if (beginTime != null && endTime == null) {
-              setEndTime(new Date())
-            }
-          }}
-        >
-          Show Result
+          Restart
         </Button>
       </Flex>
       {beginTime != null && endTime != null && (
