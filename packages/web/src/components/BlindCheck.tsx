@@ -8,7 +8,7 @@ import GameOverModal from './GameOverModal'
 import BoardView from './BoardView'
 
 const BlindCheck: FC = () => {
-  const blankList = [0, 100, 150, 200]
+  const blankList = [0, 50, 100, 150, 200]
   const randomBlanks = () => blankList[Math.floor(Math.random() * blankList.length)]
   const [blanks, setBlanks] = useState(randomBlanks())
   const generateTiles = () => {
