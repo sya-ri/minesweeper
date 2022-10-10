@@ -70,7 +70,6 @@ const BlindCheck: FC = () => {
             <br />
             Time: {Math.floor(endTime.getTime() / 1000 - beginTime.getTime() / 1000)}
             <br />
-            <br />
             Blanks: {blanks}
           </Text>
         </Center>
