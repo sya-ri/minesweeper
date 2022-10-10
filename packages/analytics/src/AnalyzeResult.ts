@@ -18,6 +18,11 @@ type AnalyzeResult = {
    * Number of tiles that have only bombs around (tiles whose countAroundBomb equals the size of getAroundTiles)
    */
   eightBombTiles: number
+
+  /**
+   * Number of largest blanks
+   */
+  largestBlanks: number
 }
 
 export default AnalyzeResult
