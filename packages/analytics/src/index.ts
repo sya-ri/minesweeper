@@ -30,14 +30,34 @@ const run = async () => {
   const resultFilePath = path.join('dist', 'result.csv')
   fs.writeFileSync(
     resultFilePath,
-    `${['name', 'unopenedTiles', 'zeroBombTiles', 'eightBombTiles', 'largestBlanks'].join()}\n`
+    `${[
+      'name',
+      'unopenedTiles',
+      'bombTiles[0]',
+      'bombTiles[1]',
+      'bombTiles[2]',
+      'bombTiles[3]',
+      'bombTiles[4]',
+      'bombTiles[5]',
+      'bombTiles[6]',
+      'bombTiles[7]',
+      'bombTiles[8]',
+      'largestBlanks'
+    ].join()}\n`
   )
   const handleResult = (name: string, result: AnalyzeResult) => {
     const output = [
       name,
       result.unopenedTiles / result.tiles,
-      result.zeroBombTiles / result.tiles,
-      result.eightBombTiles / result.tiles,
+      result.bombTiles[0] / result.tiles,
+      result.bombTiles[1] / result.tiles,
+      result.bombTiles[2] / result.tiles,
+      result.bombTiles[3] / result.tiles,
+      result.bombTiles[4] / result.tiles,
+      result.bombTiles[5] / result.tiles,
+      result.bombTiles[6] / result.tiles,
+      result.bombTiles[7] / result.tiles,
+      result.bombTiles[8] / result.tiles,
       result.largestBlanks / result.tiles
     ].join()
     fs.appendFileSync(resultFilePath, `${output}\n`)

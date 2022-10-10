@@ -10,14 +10,9 @@ type AnalyzeResult = {
   unopenedTiles: number
 
   /**
-   * Number of tiles with no bombs around (tiles whose countAroundBomb equals 0)
+   * Number of tiles with bombs around
    */
-  zeroBombTiles: number
-
-  /**
-   * Number of tiles that have only bombs around (tiles whose countAroundBomb equals the size of getAroundTiles)
-   */
-  eightBombTiles: number
+  bombTiles: [number, number, number, number, number, number, number, number, number]
 
   /**
    * Number of largest blanks

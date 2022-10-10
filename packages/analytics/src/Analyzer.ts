@@ -14,11 +14,21 @@ export default class Analyzer {
    */
   public run(): AnalyzeResult {
     const board = this.generateBoard()
+    const bombCountTiles = board.flatTiles.map(({ x, y }) => board.countAroundBomb(x, y))
     return {
       tiles: board.flatTiles.length,
       unopenedTiles: Analyzer.solve(board),
-      zeroBombTiles: board.flatTiles.filter(({ x, y }) => board.countAroundBomb(x, y) === 0).length,
-      eightBombTiles: board.flatTiles.filter(({ x, y }) => board.getAroundTiles(x, y).every((t) => t.isBomb)).length,
+      bombTiles: [
+        bombCountTiles.filter((b) => b === 0).length,
+        bombCountTiles.filter((b) => b === 1).length,
+        bombCountTiles.filter((b) => b === 2).length,
+        bombCountTiles.filter((b) => b === 3).length,
+        bombCountTiles.filter((b) => b === 4).length,
+        bombCountTiles.filter((b) => b === 5).length,
+        bombCountTiles.filter((b) => b === 6).length,
+        bombCountTiles.filter((b) => b === 7).length,
+        bombCountTiles.filter((b) => b === 8).length
+      ],
       largestBlanks: Analyzer.largestBlanks(board)
     }
   }
@@ -83,16 +93,34 @@ export default class Analyzer {
         return {
           tiles: currentValue.tiles,
           unopenedTiles: previousValue.unopenedTiles + currentValue.unopenedTiles,
-          zeroBombTiles: previousValue.zeroBombTiles + currentValue.zeroBombTiles,
-          eightBombTiles: previousValue.eightBombTiles + currentValue.eightBombTiles,
+          bombTiles: [
+            previousValue.bombTiles[0] + currentValue.bombTiles[0],
+            previousValue.bombTiles[1] + currentValue.bombTiles[1],
+            previousValue.bombTiles[2] + currentValue.bombTiles[2],
+            previousValue.bombTiles[3] + currentValue.bombTiles[3],
+            previousValue.bombTiles[4] + currentValue.bombTiles[4],
+            previousValue.bombTiles[5] + currentValue.bombTiles[5],
+            previousValue.bombTiles[6] + currentValue.bombTiles[6],
+            previousValue.bombTiles[7] + currentValue.bombTiles[7],
+            previousValue.bombTiles[8] + currentValue.bombTiles[8]
+          ],
           largestBlanks: previousValue.largestBlanks + currentValue.largestBlanks
         }
       })
     return {
       tiles: sumResult.tiles,
       unopenedTiles: sumResult.unopenedTiles / loopCount,
-      zeroBombTiles: sumResult.zeroBombTiles / loopCount,
-      eightBombTiles: sumResult.eightBombTiles / loopCount,
+      bombTiles: [
+        sumResult.bombTiles[0] / loopCount,
+        sumResult.bombTiles[1] / loopCount,
+        sumResult.bombTiles[2] / loopCount,
+        sumResult.bombTiles[3] / loopCount,
+        sumResult.bombTiles[4] / loopCount,
+        sumResult.bombTiles[5] / loopCount,
+        sumResult.bombTiles[6] / loopCount,
+        sumResult.bombTiles[7] / loopCount,
+        sumResult.bombTiles[8] / loopCount
+      ],
       largestBlanks: sumResult.largestBlanks / loopCount
     }
   }
