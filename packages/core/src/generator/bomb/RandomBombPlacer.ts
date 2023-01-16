@@ -17,18 +17,22 @@ export default class RandomBombPlacer implements BombPlacer {
     this.numberOfBomb = numberOfBomb
   }
 
-  public init(blanks: TilePosition[]) {
-    const positions: TilePosition[] = []
-    Array.from(Array(this.width).keys()).forEach((x) => {
-      Array.from(Array(this.height).keys()).forEach((y) => {
-        if (!blanks.some((t) => t.x === x && t.y === y)) {
+  public init(candidates: TilePosition[]) {
+    if (candidates.length === 0) {
+      const positions: TilePosition[] = []
+      Array.from(Array(this.width).keys()).forEach((x) => {
+        Array.from(Array(this.height).keys()).forEach((y) => {
           positions.push({ x, y })
-        }
+        })
       })
-    })
-    shuffle(positions)
-      .slice(0, this.numberOfBomb)
-      .forEach(({ x, y }) => this.bombs.add(x * this.height + y))
+      shuffle(positions)
+        .slice(0, this.numberOfBomb)
+        .forEach(({ x, y }) => this.bombs.add(x * this.height + y))
+    } else {
+      shuffle(candidates)
+        .slice(0, this.numberOfBomb)
+        .forEach(({ x, y }) => this.bombs.add(x * this.height + y))
+    }
   }
 
   public hasBomb(x: number, y: number): boolean {

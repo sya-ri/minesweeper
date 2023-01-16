@@ -5,15 +5,15 @@ import { TilePosition } from '../../Tile'
 export default class RandomWithSimplexNoiseBombPlacer extends RandomBombPlacer {
   private readonly step: number
 
-  private readonly numberOfBlanks: number
+  private readonly candidate: number
 
-  constructor(width: number, height: number, numberOfBomb: number, step: number, numberOfBlanks: number) {
+  constructor(width: number, height: number, numberOfBomb: number, step: number, candidate: number) {
     super(width, height, numberOfBomb)
     this.step = step
-    this.numberOfBlanks = numberOfBlanks
+    this.candidate = candidate
   }
 
-  public init(blanks: TilePosition[]) {
+  public init(candidates: TilePosition[]) {
     const simplex = new SimplexNoise()
     const noises = Array.from({ length: this.height }, (_y, y) => {
       return Array.from({ length: this.width }, (_x, x) => {
@@ -21,8 +21,8 @@ export default class RandomWithSimplexNoiseBombPlacer extends RandomBombPlacer {
         return { x, y, noise }
       })
     }).flat()
-    noises.sort(({ noise: noise1 }, { noise: noise2 }) => noise1 - noise2)
-    blanks.push(...noises.slice(0, this.numberOfBlanks))
-    super.init(blanks)
+    noises.sort(({ noise: noise1 }, { noise: noise2 }) => noise2 - noise1)
+    candidates.push(...noises.slice(0, Math.floor(this.width * this.height * this.candidate)))
+    super.init(candidates)
   }
 }
