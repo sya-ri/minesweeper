@@ -13,7 +13,7 @@ export default class RandomWithSimplexNoiseBombPlacer extends RandomBombPlacer {
     this.candidate = candidate
   }
 
-  public init(candidates: TilePosition[]) {
+  public init(blanks: TilePosition[], candidates: TilePosition[]) {
     const simplex = new SimplexNoise()
     const noises = Array.from({ length: this.height }, (_y, y) => {
       return Array.from({ length: this.width }, (_x, x) => {
@@ -23,6 +23,6 @@ export default class RandomWithSimplexNoiseBombPlacer extends RandomBombPlacer {
     }).flat()
     noises.sort(({ noise: noise1 }, { noise: noise2 }) => noise2 - noise1)
     candidates.push(...noises.slice(0, Math.floor(this.width * this.height * this.candidate)))
-    super.init(candidates)
+    super.init(blanks, candidates)
   }
 }

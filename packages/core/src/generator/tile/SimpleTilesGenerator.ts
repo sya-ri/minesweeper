@@ -26,7 +26,7 @@ export default class SimpleTilesGenerator implements TilesGenerator {
 
   public generate(blanks: TilePosition[]): Tile[][] {
     this._isGenerated = true
-    this.bombPlacer.init(blanks)
+    this.bombPlacer.init(blanks, [])
     return Array.from({ length: this.height }, (_y, y) =>
       Array.from({ length: this.width }, (_x, x) => {
         return new Tile(x, y, this.bombPlacer.hasBomb(x, y))
