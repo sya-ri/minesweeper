@@ -23,9 +23,6 @@ export default class RandomWithSimplexNoiseBombPlacer extends RandomBombPlacer {
     }).flat()
     noises.sort(({ noise: noise1 }, { noise: noise2 }) => noise2 - noise1)
     candidates.push(...noises.slice(0, Math.floor(this.width * this.height * this.candidate)))
-    console.log(
-      `${this.width} × ${this.height} : ${this.candidate}(${Math.floor(this.width * this.height * this.candidate)})`
-    )
     super.init(blanks, candidates)
   }
 }
