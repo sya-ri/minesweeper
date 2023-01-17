@@ -18,7 +18,15 @@ export default class RandomBombPlacer implements BombPlacer {
   }
 
   public init(blanks: TilePosition[], candidates: TilePosition[]) {
-    if (candidates.length === 0) {
+    candidates.forEach((c, index) => {
+      if (blanks.some((t) => t.x === c.x && t.y === c.y)) {
+        candidates.splice(index)
+      }
+    })
+    shuffle(candidates)
+      .slice(0, this.numberOfBomb)
+      .forEach(({ x, y }) => this.bombs.add(x * this.height + y))
+    if (this.bombs.size < this.numberOfBomb) {
       const positions: TilePosition[] = []
       Array.from(Array(this.width).keys()).forEach((x) => {
         Array.from(Array(this.height).keys()).forEach((y) => {
@@ -28,16 +36,7 @@ export default class RandomBombPlacer implements BombPlacer {
         })
       })
       shuffle(positions)
-        .slice(0, this.numberOfBomb)
-        .forEach(({ x, y }) => this.bombs.add(x * this.height + y))
-    } else {
-      candidates.forEach((c, index) => {
-        if (blanks.some((t) => t.x === c.x && t.y === c.y)) {
-          candidates.splice(index)
-        }
-      })
-      shuffle(candidates)
-        .slice(0, this.numberOfBomb)
+        .slice(0, this.numberOfBomb - this.bombs.size)
         .forEach(({ x, y }) => this.bombs.add(x * this.height + y))
     }
   }
