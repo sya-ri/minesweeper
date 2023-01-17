@@ -22,21 +22,18 @@ export default class Tile {
 
   public readonly isBomb: boolean
 
-  public readonly isCandidate: boolean
-
   private _isOpen = false
 
   private _hasFlag = false
 
-  constructor(x: number, y: number, isBomb: boolean = false, candidate: boolean = false) {
+  constructor(x: number, y: number, isBomb: boolean = false) {
     this.x = x
     this.y = y
     this.isBomb = isBomb
-    this.isCandidate = candidate
   }
 
   public clone(): Tile {
-    const tile = new Tile(this.x, this.y, this.isBomb, this.isCandidate)
+    const tile = new Tile(this.x, this.y, this.isBomb)
     tile._isOpen = this._isOpen // eslint-disable-line no-underscore-dangle
     tile._hasFlag = this._hasFlag // eslint-disable-line no-underscore-dangle
     return tile

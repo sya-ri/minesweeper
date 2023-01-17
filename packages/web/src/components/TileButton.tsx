@@ -19,12 +19,12 @@ const getTileDisplay = (tile: Tile, countAroundBomb: () => number): { text: stri
       'black', // 7
       'gray.600' // 8
     ]
-    return { text: bomb.toString(), color: colors[bomb], bg: tile.isCandidate ? 'gray.200' : 'gray.100' }
+    return { text: bomb.toString(), color: colors[bomb], bg: 'gray.100' }
   }
   if (tile.hasFlag) {
-    return { text: '▶︎', color: 'red', bg: 'gray.300' }
+    return { text: '▶︎', color: 'red', bg: 'gray.200' }
   }
-  return { text: '-', color: 'black', bg: 'gray.300' }
+  return { text: '-', color: 'black', bg: 'gray.200' }
 }
 
 export type TileButtonProps = {

@@ -11,8 +11,6 @@ export default class RandomBombPlacer implements BombPlacer {
 
   private readonly bombs = new Set<number>()
 
-  private _candidates = new Set<number>()
-
   constructor(width: number, height: number, numberOfBomb: number) {
     this.width = width
     this.height = height
@@ -21,7 +19,6 @@ export default class RandomBombPlacer implements BombPlacer {
 
   public init(blanks: TilePosition[], candidates: TilePosition[]) {
     candidates.forEach((c, index) => {
-      this._candidates.add(c.x * this.height + c.y)
       if (blanks.some((t) => t.x === c.x && t.y === c.y)) {
         candidates.splice(index)
       }
@@ -46,9 +43,5 @@ export default class RandomBombPlacer implements BombPlacer {
 
   public hasBomb(x: number, y: number): boolean {
     return this.bombs.has(x * this.height + y)
-  }
-
-  public isCandidate(x: number, y: number): boolean {
-    return this._candidates.has(x * this.height + y)
   }
 }
