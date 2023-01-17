@@ -11,12 +11,12 @@ import BoardView from './BoardView'
 
 const PlayApp: FC = () => {
   const [step, setStep] = useState(0.1)
-  const [candidates, setCandidates] = useState(0.3)
+  const [candidate, setCandidate] = useState(0.7)
   const generateTiles = () => {
-    if (step === 0 || candidates === 0) {
+    if (step === 0 || candidate === 0) {
       return new RandomTilesGenerator(30, 16, 99, true)
     }
-    return new RandomWithSimplexNoiseTilesGenerator(30, 16, 99, step, candidates, true)
+    return new RandomWithSimplexNoiseTilesGenerator(30, 16, 99, step, candidate, true)
   }
   const [board, setBoard] = useState(new Board(generateTiles()))
   const [isGameOver, setGameOver] = useState(false)
@@ -47,7 +47,7 @@ const PlayApp: FC = () => {
         <NumberInput defaultValue={step} onChange={(_value, value) => setStep(value)}>
           <NumberInputField placeholder="Simplex Noise Step" />
         </NumberInput>
-        <NumberInput defaultValue={candidates} onChange={(_value, value) => setCandidates(value)}>
+        <NumberInput defaultValue={candidate} onChange={(_value, value) => setCandidate(value)}>
           <NumberInputField placeholder="Simplex Noise Candidates" />
         </NumberInput>
       </Flex>
