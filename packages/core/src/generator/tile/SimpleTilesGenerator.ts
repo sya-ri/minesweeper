@@ -29,7 +29,7 @@ export default class SimpleTilesGenerator implements TilesGenerator {
     this.bombPlacer.init(blanks, [])
     return Array.from({ length: this.height }, (_y, y) =>
       Array.from({ length: this.width }, (_x, x) => {
-        return new Tile(x, y, this.bombPlacer.hasBomb(x, y))
+        return new Tile(x, y, this.bombPlacer.hasBomb(x, y), this.bombPlacer.isCandidate(x, y))
       })
     )
   }
