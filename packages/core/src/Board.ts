@@ -5,7 +5,7 @@ import SimpleTilesGenerator from './generator/tile/SimpleTilesGenerator'
 import RandomBombPlacer from './generator/bomb/RandomBombPlacer'
 
 export default class Board {
-  private readonly tilesGenerator: TilesGenerator
+  public readonly tilesGenerator: TilesGenerator
 
   private _tiles: Tile[][]
 

@@ -3,7 +3,7 @@ import Tile, { TilePosition } from '../../Tile'
 import BombPlacer from '../bomb/BombPlacer'
 
 export default class SimpleTilesGenerator implements TilesGenerator {
-  private readonly bombPlacer: BombPlacer
+  public readonly bombPlacer: BombPlacer
 
   public readonly width: number
 

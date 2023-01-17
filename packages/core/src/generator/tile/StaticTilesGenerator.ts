@@ -1,7 +1,10 @@
 import TilesGenerator from './TilesGenerator'
 import Tile from '../../Tile'
+import RandomBombPlacer from '../bomb/RandomBombPlacer'
 
 export default class StaticTilesGenerator implements TilesGenerator {
+  public readonly bombPlacer = new RandomBombPlacer(0, 0, 0)
+
   private readonly tiles: Tile[][]
 
   public readonly width: number

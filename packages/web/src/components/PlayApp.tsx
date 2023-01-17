@@ -8,6 +8,7 @@ import Solver from 'minesweeper-core/dist/solver/Solver'
 import BombSwapper from 'minesweeper-core/dist/swapper/BombSwapper'
 import GameOverModal from './GameOverModal'
 import BoardView from './BoardView'
+import NoiseView from './NoiseView'
 
 const PlayApp: FC = () => {
   const [width, setWidth] = useState(30)
@@ -15,6 +16,7 @@ const PlayApp: FC = () => {
   const [bomb, setBomb] = useState(99)
   const [step, setStep] = useState(0.1)
   const [candidate, setCandidate] = useState(0.7)
+  const [showNoise, setShowNoise] = useState(false)
   const generateTiles = () => {
     if (step === 0 || candidate === 0) {
       return new RandomTilesGenerator(width, height, bomb, true)
@@ -101,6 +103,9 @@ const PlayApp: FC = () => {
           Swap
         </Button>
       </Flex>
+      <Center overflow="auto">
+        {(showNoise && <NoiseView board={board} />) || <Button onClick={() => setShowNoise(true)}>Show Noise</Button>}
+      </Center>
     </Box>
   )
 }

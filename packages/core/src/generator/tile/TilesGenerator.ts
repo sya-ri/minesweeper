@@ -1,6 +1,9 @@
 import Tile, { TilePosition } from '../../Tile'
+import BombPlacer from '../bomb/BombPlacer'
 
 export default interface TilesGenerator {
+  readonly bombPlacer: BombPlacer
+
   /**
    * Width of tiles
    */
