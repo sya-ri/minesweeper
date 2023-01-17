@@ -10,13 +10,16 @@ import GameOverModal from './GameOverModal'
 import BoardView from './BoardView'
 
 const PlayApp: FC = () => {
+  const [width, setWidth] = useState(30)
+  const [height, setHeight] = useState(16)
+  const [bomb, setBomb] = useState(99)
   const [step, setStep] = useState(0.1)
   const [candidate, setCandidate] = useState(0.7)
   const generateTiles = () => {
     if (step === 0 || candidate === 0) {
-      return new RandomTilesGenerator(30, 16, 99, true)
+      return new RandomTilesGenerator(width, height, bomb, true)
     }
-    return new RandomWithSimplexNoiseTilesGenerator(30, 16, 99, step, candidate, true)
+    return new RandomWithSimplexNoiseTilesGenerator(width, height, bomb, step, candidate, true)
   }
   const [board, setBoard] = useState(new Board(generateTiles()))
   const [isGameOver, setGameOver] = useState(false)
@@ -44,6 +47,15 @@ const PlayApp: FC = () => {
         <BoardView board={board} openTile={openTile} toggleFlag={toggleFlag} isGameOver={isGameOver} />
       </Center>
       <Flex m={2} justify="center" gap={1}>
+        <NumberInput defaultValue={width} onChange={(_value, value) => setWidth(value)}>
+          <NumberInputField placeholder="Width" />
+        </NumberInput>
+        <NumberInput defaultValue={height} onChange={(_value, value) => setHeight(value)}>
+          <NumberInputField placeholder="Height" />
+        </NumberInput>
+        <NumberInput defaultValue={bomb} onChange={(_value, value) => setBomb(value)}>
+          <NumberInputField placeholder="Bomb" />
+        </NumberInput>
         <NumberInput defaultValue={step} onChange={(_value, value) => setStep(value)}>
           <NumberInputField placeholder="Simplex Noise Step" />
         </NumberInput>
