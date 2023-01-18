@@ -8,10 +8,11 @@ import Analyzer from './Analyzer'
 import AnalyzeResult from './AnalyzeResult'
 
 const analyze = (
-  name: string,
+  step: number,
+  candidate: number,
   loopCount: number,
   tilesGenerator: () => TilesGenerator,
-  handleResult: (name: string, result: AnalyzeResult) => void
+  handleResult: (step: number, candidate: number, result: AnalyzeResult) => void
 ) => {
   const analyzer = new Analyzer(() => {
     const board = new Board(tilesGenerator())
@@ -19,7 +20,7 @@ const analyze = (
     board.openTile(Math.floor(board.width / 2), Math.floor(board.height / 2))
     return board
   })
-  handleResult(name, analyzer.runAverage(loopCount))
+  handleResult(step, candidate, analyzer.runAverage(loopCount))
 }
 
 const run = async () => {
@@ -31,7 +32,8 @@ const run = async () => {
   fs.writeFileSync(
     resultFilePath,
     `${[
-      'name',
+      'step',
+      'candidate',
       'unopenedTiles',
       'bombTiles[0]',
       'bombTiles[1]',
@@ -45,9 +47,10 @@ const run = async () => {
       'largestBlanks'
     ].join()}\n`
   )
-  const handleResult = (name: string, result: AnalyzeResult) => {
+  const handleResult = (step: number, candidate: number, result: AnalyzeResult) => {
     const output = [
-      name,
+      step,
+      candidate,
       result.unopenedTiles / result.tiles,
       result.bombTiles[0] / result.tiles,
       result.bombTiles[1] / result.tiles,
@@ -62,16 +65,12 @@ const run = async () => {
     ].join()
     fs.appendFileSync(resultFilePath, `${output}\n`)
   }
-  analyze(
-    'RandomTilesGenerator',
-    loopCount,
-    () => new RandomTilesGenerator(width, height, numberOfBomb, true),
-    handleResult
-  )
+  analyze(0, 0, loopCount, () => new RandomTilesGenerator(width, height, numberOfBomb, true), handleResult)
   ;[0.001, 0.05, 0.01, 0.05, 0.1, 0.5, 1].forEach((step) => {
     ;[0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0].forEach((candidate) => {
       analyze(
-        `RandomWithSimplexNoiseTilesGenerator(${step}:${candidate})`,
+        step,
+        candidate,
         loopCount,
         () => new RandomWithSimplexNoiseTilesGenerator(width, height, numberOfBomb, step, candidate, true),
         handleResult
