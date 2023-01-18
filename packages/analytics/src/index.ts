@@ -28,9 +28,10 @@ const run = async () => {
   const width = 30
   const height = 16
   const numberOfBomb = 99
-  const resultFilePath = path.join('dist', 'result.csv')
+  const csvFilePath = path.join('dist', 'result.csv')
+  const datFilePath = path.join('dist', 'result.dat')
   fs.writeFileSync(
-    resultFilePath,
+    csvFilePath,
     `${[
       'step',
       'candidate',
@@ -63,9 +64,11 @@ const run = async () => {
       result.bombTiles[8] / result.tiles,
       result.largestBlanks / result.tiles
     ].join()
-    fs.appendFileSync(resultFilePath, `${output}\n`)
+    fs.appendFileSync(csvFilePath, `${output}\n`)
+    fs.appendFileSync(datFilePath, `${output}\n`)
   }
   analyze(0, 0, loopCount, () => new RandomTilesGenerator(width, height, numberOfBomb, true), handleResult)
+  fs.appendFileSync(datFilePath, '\n')
   ;[0.00625, 0.0125, 0.025, 0.05, 0.1, 0.25, 0.5, 0.75, 1].forEach((step) => {
     ;[0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0].forEach((candidate) => {
       analyze(
@@ -76,6 +79,7 @@ const run = async () => {
         handleResult
       )
     })
+    fs.appendFileSync(datFilePath, '\n')
   })
 }
 
