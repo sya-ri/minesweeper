@@ -73,15 +73,17 @@ const run = async () => {
   analyze(0, 0, loopCount, () => new RandomTilesGenerator(width, height, numberOfBomb, true), handleResult)
   fs.appendFileSync(datFilePath, '\n')
   ;[0.00625, 0.0125, 0.025, 0.05, 0.1, 0.25, 0.5, 0.75, 1].forEach((step) => {
-    ;[0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0].forEach((candidate) => {
-      analyze(
-        step,
-        candidate,
-        loopCount,
-        () => new RandomWithSimplexNoiseTilesGenerator(width, height, numberOfBomb, step, candidate, true),
-        handleResult
-      )
-    })
+    ;[0.20625 /* ... numberOfBomb / (width * height) */, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0].forEach(
+      (candidate) => {
+        analyze(
+          step,
+          candidate,
+          loopCount,
+          () => new RandomWithSimplexNoiseTilesGenerator(width, height, numberOfBomb, step, candidate, true),
+          handleResult
+        )
+      }
+    )
     fs.appendFileSync(datFilePath, '\n')
   })
 }
