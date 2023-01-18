@@ -49,6 +49,7 @@ const run = async () => {
       'largestBlanks'
     ].join()}\n`
   )
+  fs.writeFileSync(datFilePath, '')
   const handleResult = (step: number, candidate: number, result: AnalyzeResult) => {
     const output = [
       step,
