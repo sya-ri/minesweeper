@@ -68,12 +68,12 @@ const run = async () => {
     () => new RandomTilesGenerator(width, height, numberOfBomb, true),
     handleResult
   )
-  ;[0.1].forEach((step) => {
-    ;[50, 100, 150, 200].forEach((numberOfBlanks) => {
+  ;[0.001, 0.05, 0.01, 0.05, 0.1, 0.5, 1].forEach((step) => {
+    ;[0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0].forEach((candidate) => {
       analyze(
-        `RandomWithSimplexNoiseTilesGenerator(${step}:${numberOfBlanks})`,
+        `RandomWithSimplexNoiseTilesGenerator(${step}:${candidate})`,
         loopCount,
-        () => new RandomWithSimplexNoiseTilesGenerator(width, height, numberOfBomb, step, numberOfBlanks, true),
+        () => new RandomWithSimplexNoiseTilesGenerator(width, height, numberOfBomb, step, candidate, true),
         handleResult
       )
     })
