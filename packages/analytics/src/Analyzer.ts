@@ -17,6 +17,7 @@ export default class Analyzer {
     const bombCountTiles = board.flatTiles.map(({ x, y }) => board.countAroundBomb(x, y))
     return {
       tiles: board.flatTiles.length,
+      bombs: board.flatTiles.filter((t) => t.isBomb).length,
       unopenedTiles: Analyzer.solve(board),
       bombTiles: [
         bombCountTiles.filter((b) => b === 0).length,
@@ -92,6 +93,7 @@ export default class Analyzer {
         // However, don't need to calculate the average as all the AnalyzeResult#tiles are the same.
         return {
           tiles: currentValue.tiles,
+          bombs: currentValue.bombs,
           unopenedTiles: previousValue.unopenedTiles + currentValue.unopenedTiles,
           bombTiles: [
             previousValue.bombTiles[0] + currentValue.bombTiles[0],
@@ -109,6 +111,7 @@ export default class Analyzer {
       })
     return {
       tiles: sumResult.tiles,
+      bombs: sumResult.bombs,
       unopenedTiles: sumResult.unopenedTiles / loopCount,
       bombTiles: [
         sumResult.bombTiles[0] / loopCount,

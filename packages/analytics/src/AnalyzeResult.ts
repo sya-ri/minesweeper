@@ -5,6 +5,11 @@ type AnalyzeResult = {
   tiles: number
 
   /**
+   * Number of bombs on the board
+   */
+  bombs: number
+
+  /**
    * Number of tiles that couldn't be opened using Solver
    */
   unopenedTiles: number

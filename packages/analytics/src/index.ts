@@ -35,6 +35,7 @@ const run = async () => {
     `${[
       'step',
       'candidate',
+      'bombs',
       'unopenedTiles',
       'bombTiles[0]',
       'bombTiles[1]',
@@ -52,6 +53,7 @@ const run = async () => {
     const output = [
       step,
       candidate,
+      result.bombs,
       result.unopenedTiles / result.tiles,
       result.bombTiles[0] / result.tiles,
       result.bombTiles[1] / result.tiles,
