@@ -93,7 +93,7 @@ export default class Analyzer {
         // However, don't need to calculate the average as all the AnalyzeResult#tiles are the same.
         return {
           tiles: currentValue.tiles,
-          bombs: currentValue.bombs,
+          bombs: previousValue.bombs + currentValue.bombs,
           unopenedTiles: previousValue.unopenedTiles + currentValue.unopenedTiles,
           bombTiles: [
             previousValue.bombTiles[0] + currentValue.bombTiles[0],
@@ -111,7 +111,7 @@ export default class Analyzer {
       })
     return {
       tiles: sumResult.tiles,
-      bombs: sumResult.bombs,
+      bombs: sumResult.bombs / loopCount,
       unopenedTiles: sumResult.unopenedTiles / loopCount,
       bombTiles: [
         sumResult.bombTiles[0] / loopCount,
